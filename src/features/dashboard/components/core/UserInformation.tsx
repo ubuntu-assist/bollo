@@ -121,7 +121,7 @@ const UserInformation = () => {
                     <div className='flex'>
                       {[1, 2, 3].map((img, idx) => (
                         <img
-                          key={idx}
+                          key={img}
                           src={reviewPeople}
                           alt=''
                           className={`size-10 rounded-full bg-white p-0.5 ${

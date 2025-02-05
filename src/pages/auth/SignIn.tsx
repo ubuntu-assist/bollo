@@ -10,7 +10,7 @@ import peopleSmall3 from '../../assets/images/people_small3.png'
 import loginSliderIcon from '../../assets/images/login_slider_icon.png'
 import googleIcon from '../../assets/images/google_icon.png'
 import facebookIcon from '../../assets/images/facebook_icon.png'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 
 interface TestimonialSlide {
   image: string
@@ -19,6 +19,7 @@ interface TestimonialSlide {
 }
 
 const SignIn = () => {
+  const navigate = useNavigate()
   const slider1Ref = useRef<HTMLDivElement>(null)
   const slider2Ref = useRef<HTMLDivElement>(null)
 
@@ -186,7 +187,10 @@ const SignIn = () => {
               >
                 Forgot Password?
               </a>
-              <button className='relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-b300 px-4 py-3 font-semibold text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-xl after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] sm:px-8'>
+              <button
+                onClick={() => navigate('/dashboard')}
+                className='relative flex w-full items-center justify-center overflow-hidden rounded-xl bg-b300 px-4 py-3 font-semibold text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-xl after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] sm:px-8'
+              >
                 <span className='relative z-10'>Sign In</span>
               </button>
               <div className='flex items-center justify-center gap-2 py-3 text-sm font-medium'>
