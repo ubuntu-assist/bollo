@@ -12,6 +12,7 @@ import GetHelpTodaySection from './common/GetHelpTodaySection'
 import AppLayout from './layout/AppLayout'
 import BreadcrumbSection from './common/BreadcrumbSection'
 import SearchBoxSection from './common/SearchBoxSection'
+import ScrollToTop from './layout/ScrollToTop'
 
 export {
   HeroSection,
@@ -28,4 +29,5 @@ export {
   AppLayout,
   BreadcrumbSection,
   SearchBoxSection,
+  ScrollToTop,
 }

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Route } from 'react-router'
 import { Routes } from 'react-router'
-import { AppLayout } from './components'
+import { AppLayout, ScrollToTop } from './components'
 import {
   BecomeTasker,
   HireMe,
@@ -29,6 +29,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route path='/' element={<AppLayout />}>
           <Route index element={<Home />} />
