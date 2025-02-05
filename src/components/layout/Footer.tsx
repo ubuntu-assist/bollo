@@ -90,7 +90,8 @@ const Footer = () => {
         <div className='flex items-center justify-start gap-1'>
           <p>Designed By</p>
           <a
-            href=''
+            target='_blank'
+            href='https://www.moock.io'
             className='text-[#E31C79] hover:text-[#E31C79]/80 underline'
           >
             Mo'ock

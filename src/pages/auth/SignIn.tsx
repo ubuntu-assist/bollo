@@ -168,6 +168,7 @@ const SignIn = () => {
                 <input
                   type='text'
                   placeholder='Enter Your Email'
+                  value='duclair.fopa@hotmail.com'
                   className='w-full text-sm text-n300 outline-none'
                 />
               </div>
@@ -176,6 +177,7 @@ const SignIn = () => {
                 <input
                   type='password'
                   placeholder='*******'
+                  value='myaccount'
                   className='w-full text-sm text-n300 outline-none'
                 />
               </div>

@@ -70,12 +70,6 @@ const Header = () => {
           <div className='flex items-center gap-6'>
             <div className='hidden sm:flex items-center gap-6'>
               <Link
-                to='/sign-up'
-                className='text-[#1B3B86] hover:text-[#E31C79] transition-colors'
-              >
-                Sign up
-              </Link>
-              <Link
                 to='/signin'
                 className='text-[#1B3B86] hover:text-[#E31C79] transition-colors'
               >
