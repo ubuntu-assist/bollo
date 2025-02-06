@@ -7,6 +7,7 @@ import WorkerProfile from './WorkerProfile'
 import NotFoundPage from './NotFoundPage'
 import SignIn from './auth/SignIn'
 import SignUp from './auth/SignUp'
+import WorkingProcessed from './WorkingProcessed'
 
 export {
   Home,
@@ -18,4 +19,5 @@ export {
   NotFoundPage,
   SignIn,
   SignUp,
+  WorkingProcessed,
 }

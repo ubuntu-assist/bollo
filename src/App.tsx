@@ -12,6 +12,7 @@ import {
   SignIn,
   SignUp,
   WorkerProfile,
+  WorkingProcessed,
 } from './pages'
 import { initAos } from './utils/init-aos'
 import DashboardLayout from './features/dashboard/components/layout/DashboardLayout'
@@ -50,6 +51,7 @@ function App() {
         <Route path='signin' element={<SignIn />} />
         <Route path='signup' element={<SignUp />} />
         <Route path='*' element={<NotFoundPage />} />
+        <Route path='post-task' element={<WorkingProcessed />} />
       </Routes>
     </BrowserRouter>
   )
