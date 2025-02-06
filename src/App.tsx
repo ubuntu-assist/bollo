@@ -10,6 +10,7 @@ import {
   ServiceDetails,
   Services,
   SignIn,
+  SignUp,
   WorkerProfile,
 } from './pages'
 import { initAos } from './utils/init-aos'
@@ -47,6 +48,7 @@ function App() {
           <Route path='services' element={<DashboardServices />} />
         </Route>
         <Route path='signin' element={<SignIn />} />
+        <Route path='signup' element={<SignUp />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>

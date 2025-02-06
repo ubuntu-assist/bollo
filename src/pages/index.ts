@@ -6,6 +6,7 @@ import HireMe from './HireMe'
 import WorkerProfile from './WorkerProfile'
 import NotFoundPage from './NotFoundPage'
 import SignIn from './auth/SignIn'
+import SignUp from './auth/SignUp'
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   WorkerProfile,
   NotFoundPage,
   SignIn,
+  SignUp,
 }
