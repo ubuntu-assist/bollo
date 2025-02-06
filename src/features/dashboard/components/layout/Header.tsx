@@ -1,4 +1,5 @@
 import { Link } from 'react-router'
+import { useState, useEffect, useRef } from 'react'
 import logo from '../../../../assets/images/logo.png'
 import userProfile from '../../../../assets/images/people_small1.png'
 
@@ -13,12 +14,47 @@ interface NotificationItem {
 }
 
 const Header = () => {
+  const [isProfileOpen, setIsProfileOpen] = useState(false)
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const profileRef = useRef<HTMLDivElement>(null)
+  const notificationRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        profileRef.current &&
+        !profileRef.current.contains(event.target as Node)
+      ) {
+        setIsProfileOpen(false)
+      }
+      if (
+        notificationRef.current &&
+        !notificationRef.current.contains(event.target as Node)
+      ) {
+        setIsNotificationOpen(false)
+      }
+    }
+
+    if (isProfileOpen || isNotificationOpen) {
+      document.addEventListener('click', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [isProfileOpen, isNotificationOpen])
+
+  const toggleProfile = () => setIsProfileOpen(!isProfileOpen)
+  const toggleNotification = () => setIsNotificationOpen(!isNotificationOpen)
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
+
   const navItems: NavItem[] = [
-    { title: 'Dashboard', path: './index.html' },
+    { title: 'Dashboard', path: '/dashboard' },
     { title: 'Services', path: '/dashboard/services' },
-    { title: 'Payout History', path: './payment-details.html' },
+    { title: 'Payout History', path: '/dashboard/payments' },
     { title: 'Wishlist', path: '/dashboard/wishlist' },
-    { title: 'Review', path: './reviews.html' },
+    { title: 'Review', path: '/dashboard/reviews' },
   ]
 
   const notifications: NotificationItem[] = [
@@ -33,9 +69,11 @@ const Header = () => {
       <header className='header headerAbsolute left-0 right-0 top-0 z-50 bg-white'>
         <div className='4xl:large-container max-4xl:container'>
           <div className='text-s1 flex items-center justify-between py-6'>
-            {/* Logo Section */}
             <div className='flex items-center justify-start gap-3 pb-1'>
-              <button className='mobileMenuOpenButton text-3xl text-[#1B3B86] lg:hidden'>
+              <button
+                className='text-3xl text-[#1B3B86] lg:hidden'
+                onClick={toggleMobileMenu}
+              >
                 <i className='ph ph-list'></i>
               </button>
               <Link to='/'>
@@ -43,38 +81,36 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
             <nav className='max-lg:hidden'>
               <ul className='flex items-center justify-center gap-2 font-medium xxl:gap-6'>
                 {navItems.map((item) => (
                   <li key={item.title}>
-                    <a
-                      href={item.path}
+                    <Link
+                      to={item.path}
                       className='dashboardMenu rounded-full px-4 py-3 text-gray-600 transition-colors duration-300 hover:bg-[#1B3B86] hover:text-white'
                     >
                       {item.title}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </nav>
 
-            {/* Right Section */}
             <div className='flex items-center justify-end gap-2 sm:gap-6'>
-              {/* Notification Bell */}
               <div
+                ref={notificationRef}
                 className='relative flex cursor-pointer items-center justify-center rounded-full bg-[#1B3B86]/5 p-3 text-[#1B3B86] hover:bg-[#1B3B86]/10 transition-colors'
-                id='notification'
+                onClick={toggleNotification}
               >
                 <i className='ph ph-bell text-2xl !leading-none'></i>
                 <span className='absolute right-3 top-3 rounded-full bg-[#E31C79]/10 p-px'>
                   <span className='block size-2.5 rounded-full bg-[#E31C79]'></span>
                 </span>
 
-                {/* Notification Dropdown */}
                 <div
-                  className='modalClose absolute right-0 top-12 w-[230px] origin-top-right rounded-2xl border border-[#1B3B86]/10 bg-white py-4 shadow-lg duration-500'
-                  id='notificationModal'
+                  className={`absolute right-0 top-12 w-[230px] origin-top-right rounded-2xl border border-[#1B3B86]/10 bg-white py-4 shadow-lg duration-500 ${
+                    isNotificationOpen ? 'modalOpen' : 'modalClose'
+                  }`}
                 >
                   <p className='px-4 pb-3 text-lg font-semibold text-gray-900'>
                     Notification
@@ -101,10 +137,10 @@ const Header = () => {
                 </div>
               </div>
 
-              {/* Profile Menu */}
               <div
+                ref={profileRef}
                 className='relative cursor-pointer rounded-full bg-[#1B3B86]/5 p-px hover:bg-[#1B3B86]/10 transition-colors'
-                id='profileIcon'
+                onClick={toggleProfile}
               >
                 <img
                   src={userProfile}
@@ -112,8 +148,9 @@ const Header = () => {
                   alt='User profile'
                 />
                 <div
-                  className='modalClose absolute right-0 top-12 w-[200px] origin-top-right rounded-2xl border border-[#1B3B86]/10 bg-white py-4 shadow-lg duration-500'
-                  id='profileModal'
+                  className={`absolute right-0 top-12 w-[200px] origin-top-right rounded-2xl border border-[#1B3B86]/10 bg-white py-4 shadow-lg duration-500 ${
+                    isProfileOpen ? 'modalOpen' : 'modalClose'
+                  }`}
                 >
                   <ul className='flex flex-col gap-3 pl-4'>
                     {['Profile', 'Edit Profile', 'Settings', 'Logout'].map(
@@ -135,16 +172,27 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         <nav className='lg:hidden'>
-          <div className='mobileMenuBg mobileMenuBgClose fixed left-0 top-0 z-[998] h-full w-full bg-[#1B3B86]/5 duration-700'></div>
+          <div
+            className={`fixed left-0 top-0 z-[998] h-full w-full bg-[#1B3B86]/5 duration-700 ${
+              isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+            }`}
+            onClick={toggleMobileMenu}
+          />
 
-          <div className='mobileMenu mobileMenuClose fixed left-0 top-0 z-[999] flex h-full w-3/4 flex-col items-start justify-start gap-8 bg-[#1B3B86] text-white/90 duration-700 min-[500px]:w-1/2'>
+          <div
+            className={`fixed left-0 top-0 z-[999] flex h-full w-3/4 flex-col items-start justify-start gap-8 bg-[#1B3B86] text-white/90 duration-700 min-[500px]:w-1/2 ${
+              isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
+          >
             <div className='fixed top-0 flex w-full items-center justify-between bg-[#1B3B86] p-4 sm:p-8'>
               <Link to='/'>
                 <img src={logo} alt='logo' className='w-[150px]' />
               </Link>
-              <button className='mobileMenuCloseButton text-3xl text-white hover:text-[#E31C79] transition-colors'>
+              <button
+                className='text-3xl text-white hover:text-[#E31C79] transition-colors'
+                onClick={toggleMobileMenu}
+              >
                 <i className='ph ph-x'></i>
               </button>
             </div>
@@ -155,6 +203,7 @@ const Header = () => {
                   <a
                     href={item.path}
                     className='text-white/90 hover:text-[#E31C79] transition-colors'
+                    onClick={toggleMobileMenu}
                   >
                     {item.title}
                   </a>

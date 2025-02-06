@@ -1,14 +1,41 @@
 import { Link } from 'react-router'
+import { useState } from 'react'
 import logo from '../../assets/images/logo.png'
 
 const Header = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null)
+
+  const navItems = [
+    { name: 'Home', type: 'link', to: '/' },
+    { name: 'Services', type: 'link', to: '/services' },
+    {
+      name: 'Workers',
+      type: 'dropdown',
+      options: ['Option 1', 'Option 2'],
+    },
+    {
+      name: 'Pages',
+      type: 'dropdown',
+      options: ['Option 1', 'Option 2'],
+    },
+  ]
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen)
+
+  const toggleSubmenu = (name: string) => {
+    setActiveSubmenu(activeSubmenu === name ? null : name)
+  }
+
   return (
     <header className='header headerAbsolute left-0 right-0 top-0 z-50'>
       <div className='max-xxl:container xxl:px-25'>
         <div className='text-s1 flex items-center justify-between py-6'>
-          {/* Logo and Mobile Menu */}
           <div className='flex items-center gap-3'>
-            <button className='lg:hidden text-[#1B3B86]'>
+            <button
+              className='lg:hidden text-[#1B3B86]'
+              onClick={toggleMobileMenu}
+            >
               <i className='ph-bold ph-list text-4xl'></i>
             </button>
             <Link to='/'>
@@ -16,23 +43,9 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <nav className='hidden lg:block'>
             <ul className='flex items-center gap-6 font-medium'>
-              {[
-                { name: 'Home', type: 'link', to: '/' },
-                { name: 'Services', type: 'link', to: '/services' },
-                {
-                  name: 'Workers',
-                  type: 'dropdown',
-                  options: ['Option 1', 'Option 2'],
-                },
-                {
-                  name: 'Pages',
-                  type: 'dropdown',
-                  options: ['Option 1', 'Option 2'],
-                },
-              ].map((item) => (
+              {navItems.map((item) => (
                 <li key={item.name} className='group relative'>
                   {item.type === 'link' ? (
                     <Link
@@ -66,7 +79,6 @@ const Header = () => {
             </ul>
           </nav>
 
-          {/* Action Buttons */}
           <div className='flex items-center gap-6'>
             <div className='hidden sm:flex items-center gap-6'>
               <Link
@@ -98,18 +110,69 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div className='lg:hidden'>
+      <div className={`lg:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
         <div
-          className='fixed inset-0 bg-black/50 invisible opacity-0'
-          id='mobile-overlay'
-        ></div>
-        <div className='fixed top-0 left-0 h-full w-3/4 -translate-x-full bg-[#1B3B86] text-white transition-transform'>
-          {/* Mobile menu content here */}
+          className={`fixed inset-0 bg-black/50 transition-opacity ${
+            isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+          }`}
+          onClick={toggleMobileMenu}
+        />
+        <div
+          className={`fixed top-0 left-0 h-full w-3/4 bg-[#1B3B86] text-white transition-transform ${
+            isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        >
           <div className='p-6'>
-            <button className='text-white mb-8'>
+            <button className='text-white mb-8' onClick={toggleMobileMenu}>
               <i className='ph ph-x text-2xl'></i>
             </button>
-            {/* Mobile menu items */}
+
+            <ul className='space-y-4'>
+              {navItems.map((item) => (
+                <li key={item.name}>
+                  {item.type === 'link' ? (
+                    <Link
+                      to={item.to!}
+                      className='block py-2 text-white hover:text-[#E31C79] transition-colors'
+                      onClick={toggleMobileMenu}
+                    >
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <div>
+                      <button
+                        className='flex items-center justify-between w-full py-2 text-white hover:text-[#E31C79] transition-colors'
+                        onClick={() => toggleSubmenu(item.name)}
+                      >
+                        {item.name}
+                        <i
+                          className={`ph ph-caret-down transition-transform ${
+                            activeSubmenu === item.name ? 'rotate-180' : ''
+                          }`}
+                        ></i>
+                      </button>
+                      <ul
+                        className={`pl-4 space-y-2 overflow-hidden transition-all ${
+                          activeSubmenu === item.name ? 'max-h-40' : 'max-h-0'
+                        }`}
+                      >
+                        {item.options!.map((option) => (
+                          <li key={option}>
+                            <Link
+                              to='#'
+                              className='block py-2 text-white/80 hover:text-[#E31C79] transition-colors'
+                              onClick={toggleMobileMenu}
+                            >
+                              {option}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

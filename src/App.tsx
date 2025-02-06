@@ -22,6 +22,8 @@ import {
   Profile,
   Whishlist,
   DashboardServices,
+  Reviews,
+  Payments,
 } from './pages/dashboard'
 
 function App() {
@@ -47,6 +49,8 @@ function App() {
           <Route path='edit-profile' element={<EditProfile />} />
           <Route path='wishlist' element={<Whishlist />} />
           <Route path='services' element={<DashboardServices />} />
+          <Route path='reviews' element={<Reviews />} />
+          <Route path='payments' element={<Payments />} />
         </Route>
         <Route path='signin' element={<SignIn />} />
         <Route path='signup' element={<SignUp />} />
