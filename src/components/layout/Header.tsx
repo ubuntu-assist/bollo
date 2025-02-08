@@ -173,6 +173,26 @@ const Header = () => {
                 </li>
               ))}
             </ul>
+
+            <div className='flex items-center gap-6'>
+              <div className='hidden sm:flex items-center gap-6'>
+                <Link
+                  to='/signin'
+                  className='text-[#1B3B86] hover:text-[#E31C79] transition-colors'
+                >
+                  Sign in
+                </Link>
+              </div>
+
+              <div className='flex items-center gap-3'>
+                <Link
+                  to='/become-tasker'
+                  className='hidden xl:flex items-center px-8 py-3 rounded-full border-2 border-[#1B3B86] text-[#1B3B86] hover:bg-[#E31C79] hover:border-[#E31C79] hover:text-white transition-colors'
+                >
+                  Become a Tasker
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
