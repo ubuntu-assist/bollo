@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import logo from '../assets/images/logo.png'
 import { Link } from 'react-router'
-import countryArgentina from '../assets/images/country_argentina.png'
-import countryAustralia from '../assets/images/country_australia.png'
-import countryBrazil from '../assets/images/country_brazil.png'
-import countryIreland from '../assets/images/country_Ireland.png'
-import countrySingapore from '../assets/images/country_singapore.png'
+import countryCameroon from '../assets/images/cameroon-flag.png'
+import countryNigeria from '../assets/images/nigeria-flag.png'
+import countryKenya from '../assets/images/kenya-flag.png'
+import countryEthiopia from '../assets/images/ethiopia-flag.png'
+import countryGhana from '../assets/images/ghana-flag.png'
 import stepsIcon from '../assets/images/steps_icon.png'
 
 type TimePeriod = 'morning' | 'afternoon' | 'evening' | 'night'
@@ -69,11 +69,11 @@ const initialFormData: TaskFormData = {
 }
 
 const regions = [
-  { name: 'Australia', image: countryAustralia },
-  { name: 'Brazil', image: countryBrazil },
-  { name: 'Ireland', image: countryIreland },
-  { name: 'Argentina', image: countryArgentina },
-  { name: 'Singapore', image: countrySingapore },
+  { name: 'Nigeria', image: countryNigeria },
+  { name: 'Kenya', image: countryKenya },
+  { name: 'Ethiopia', image: countryEthiopia },
+  { name: 'Cameroon', image: countryCameroon },
+  { name: 'Ghana', image: countryGhana },
 ]
 
 const TaskPostingForm = () => {
