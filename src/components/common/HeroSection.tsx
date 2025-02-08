@@ -8,6 +8,7 @@ import heroSliderImg4 from '../../assets/images/hero_slider_img_4.png'
 import peopleSmall from '../../assets/images/people_small1.png'
 import peoplePlus from '../../assets/images/people_plus.png'
 import { useEffect, useRef } from 'react'
+import { Link } from 'react-router'
 
 interface SliderContent {
   img: string
@@ -119,15 +120,15 @@ const HeroSection = () => {
 
           {/* CTA Button */}
           <div>
-            <a
-              href='./find-workers'
+            <Link
+              to='/signin'
               className='group relative flex items-center justify-start pr-12 font-semibold'
             >
               <span className='rounded-full bg-[#E31C79] text-white px-6 py-3 duration-500 group-hover:translate-x-12'>
                 Explore Now
               </span>
               <i className='ph-bold ph-arrow-up-right absolute right-0 top-0 translate-x-0 rounded-full bg-[#E31C79] text-white p-[14px] text-xl !leading-none duration-500 group-hover:right-[152px] group-hover:rotate-45'></i>
-            </a>
+            </Link>
           </div>
 
           {/* Rating Section */}
