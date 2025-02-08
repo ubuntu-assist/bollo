@@ -569,7 +569,12 @@ const TaskPostingForm = () => {
                 className='flex items-center justify-between hover:bg-gray-50 p-2 rounded-lg transition-colors'
               >
                 <div className='flex items-center justify-start gap-6'>
-                  <img src={region.image} alt={region.name} />
+                  <img
+                    src={region.image}
+                    alt={region.name}
+                    width={70}
+                    height={50}
+                  />
                   <p className='text-lg font-medium'>{region.name}</p>
                 </div>
                 <div className='text-xl'>
