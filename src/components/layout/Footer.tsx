@@ -12,7 +12,7 @@ const Footer = () => {
               <li key={item}>
                 <a
                   className='duration-500 hover:text-[#E31C79]'
-                  href={`./${item.toLowerCase().replace(/\s+/g, '-')}.html`}
+                  href={`./${item.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   {item}
                 </a>
@@ -20,7 +20,7 @@ const Footer = () => {
             ))}
           </ul>
 
-          <a href='./index.html'>
+          <a href='./index'>
             <img src={logo} alt='Bollo logo' className='w-auto h-16' />
           </a>
 
@@ -29,7 +29,7 @@ const Footer = () => {
               <li key={item}>
                 <a
                   className='duration-500 hover:text-[#E31C79]'
-                  href={`./${item.toLowerCase().replace(/\s+/g, '-')}.html`}
+                  href={`./${item.toLowerCase().replace(/\s+/g, '-')}`}
                 >
                   {item}
                 </a>

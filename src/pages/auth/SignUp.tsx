@@ -151,7 +151,7 @@ const SignUp = () => {
         <div className='flex h-full w-full max-w-[530px] flex-col items-center justify-center max-lg:px-6 max-lg:pt-40 max-sm:pt-32 lg:ml-20 xl:max-w-[380px] xxl:max-w-[530px] 3xl:ml-40'>
           {/* Logo */}
           <div>
-            <a href='./index.html'>
+            <a href='./index'>
               <img src={logo} alt='Bollo logo' className='h-24 w-auto' />
             </a>
           </div>

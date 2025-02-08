@@ -36,7 +36,7 @@ const RecentPostsSection = () => {
           </div>
           <div>
             <a
-              href='./blog.html'
+              href='./blog'
               className='flex items-center justify-start gap-3 font-bold text-[#1B3B86] hover:text-[#E31C79] duration-300'
             >
               All Articles
@@ -69,7 +69,7 @@ const RecentPostsSection = () => {
 
               {/* Content Container */}
               <div className='rounded-2xl bg-white border border-[#1B3B86]/10 px-6 py-5 duration-500 group-hover:bg-[#1B3B86]/5'>
-                <a href='./blog-details.html'>
+                <a href='./blog-details'>
                   <h4 className='heading-4 pb-3 text-gray-900 group-hover:text-[#1B3B86]'>
                     {post.title}
                   </h4>
@@ -80,7 +80,7 @@ const RecentPostsSection = () => {
                     12, 2024
                   </p>
                   <a
-                    href='./blog-details.html'
+                    href='./blog-details'
                     className='flex items-center justify-center rounded-full bg-[#1B3B86] p-2 text-2xl !leading-none text-white duration-500 group-hover:bg-[#E31C79] group-hover:rotate-45'
                   >
                     <i className='ph ph-arrow-up-right'></i>

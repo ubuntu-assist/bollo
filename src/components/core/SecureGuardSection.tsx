@@ -97,7 +97,7 @@ const SecureGuardSection = () => {
           {/* CTA Button */}
           <div className='flex justify-start pt-10'>
             <a
-              href='./working-processed-step-01.html'
+              href='./working-processed-step-01'
               className='group relative flex items-center justify-start pr-12 font-semibold'
             >
               <span className='rounded-full bg-[#E31C79] text-white px-6 py-3 duration-500 group-hover:translate-x-12'>

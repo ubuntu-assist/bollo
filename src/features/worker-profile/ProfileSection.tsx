@@ -45,7 +45,7 @@ const ProfileSection = () => {
             </p>
             <div className='w-full pt-8 sm:px-12'>
               <a
-                href='./chat.html'
+                href='./chat'
                 className='relative block w-full overflow-hidden rounded-full bg-n700 px-6 py-3 text-sm font-semibold text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)]'
               >
                 <div className='relative z-20 flex items-center justify-center gap-3'>
@@ -56,7 +56,7 @@ const ProfileSection = () => {
             </div>
 
             <a
-              href='./worker-portfolio.html'
+              href='./worker-portfolio'
               className='mt-5 flex w-full items-center justify-between rounded-xl border border-n30 px-5 py-3'
             >
               <p className='font-semibold'>View My Portfolio</p>
@@ -184,7 +184,7 @@ const ProfileSection = () => {
             <ul className='flex items-center justify-start gap-5 border-b border-n30 pb-5 text-n100 max-md:flex-wrap'>
               <li>
                 <a
-                  href='./worker-profile.html'
+                  href='./worker-profile'
                   className='heading-5 text-n900 duration-500'
                 >
                   Services
@@ -192,7 +192,7 @@ const ProfileSection = () => {
               </li>
               <li>
                 <a
-                  href='./worker-profile-works.html'
+                  href='./worker-profile-works'
                   className='heading-5 duration-500 hover:text-n900'
                 >
                   Work
@@ -201,7 +201,7 @@ const ProfileSection = () => {
 
               <li>
                 <a
-                  href='./worker-profile-jobs.html'
+                  href='./worker-profile-jobs'
                   className='heading-5 duration-500 hover:text-n900'
                 >
                   Jobs
@@ -210,7 +210,7 @@ const ProfileSection = () => {
 
               <li>
                 <a
-                  href='./worker-profile-recommendations.html'
+                  href='./worker-profile-recommendations'
                   className='heading-5 duration-500 hover:text-n900'
                 >
                   Recommendations
@@ -253,7 +253,7 @@ const ProfileSection = () => {
                 <p className='py-1 font-semibold text-r300'>$75 - &100/hr</p>
                 <p className='pb-5 text-sm font-semibold'>Fixed Price</p>
                 <a
-                  href='./service-details.html'
+                  href='./service-details'
                   className='relative flex items-center justify-center overflow-hidden rounded-full bg-b300 px-3 py-2 text-sm font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-4 lg:py-3'
                 >
                   <span className='relative z-10'>View Details</span>
@@ -296,7 +296,7 @@ const ProfileSection = () => {
                 <p className='py-1 font-semibold text-r300'>$75 - &100/hr</p>
                 <p className='pb-5 text-sm font-semibold'>Fixed Price</p>
                 <a
-                  href='./service-details.html'
+                  href='./service-details'
                   className='relative flex items-center justify-center overflow-hidden rounded-full bg-b300 px-3 py-2 text-sm font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-4 lg:py-3'
                 >
                   <span className='relative z-10'>View Details</span>
@@ -339,7 +339,7 @@ const ProfileSection = () => {
                 <p className='py-1 font-semibold text-r300'>$75 - &100/hr</p>
                 <p className='pb-5 text-sm font-semibold'>Fixed Price</p>
                 <a
-                  href='./service-details.html'
+                  href='./service-details'
                   className='relative flex items-center justify-center overflow-hidden rounded-full bg-b300 px-3 py-2 text-sm font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-4 lg:py-3'
                 >
                   <span className='relative z-10'>View Details</span>
@@ -382,7 +382,7 @@ const ProfileSection = () => {
                 <p className='py-1 font-semibold text-r300'>$75 - &100/hr</p>
                 <p className='pb-5 text-sm font-semibold'>Fixed Price</p>
                 <a
-                  href='./service-details.html'
+                  href='./service-details'
                   className='relative flex items-center justify-center overflow-hidden rounded-full bg-b300 px-3 py-2 text-sm font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-4 lg:py-3'
                 >
                   <span className='relative z-10'>View Details</span>

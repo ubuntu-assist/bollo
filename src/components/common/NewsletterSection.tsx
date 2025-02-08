@@ -73,7 +73,7 @@ const NewsletterSection = () => {
             <div>
               <h5 className='heading-5'>More than 15k active users!</h5>
               <a
-                href='./sign-up-step-1.html'
+                href='./sign-up-step-1'
                 className='flex items-center justify-start gap-3 pt-3 font-medium hover:text-[#E31C79] transition-colors'
               >
                 Join them now <i className='ph ph-arrow-right'></i>

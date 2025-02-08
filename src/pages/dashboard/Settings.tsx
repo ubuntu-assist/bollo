@@ -6,7 +6,7 @@ const Settings = () => {
           <div className='col-span-12 flex items-center justify-between gap-4'>
             <h4 className='heading-4'>Account Settings</h4>
             <a
-              href='./edit-profile.html'
+              href='./edit-profile'
               className='flex items-center justify-start gap-3 text-lg font-medium text-b300'
             >
               <i className='ph ph-pencil-simple-line text-2xl'></i>Edit Settings

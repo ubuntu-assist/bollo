@@ -102,7 +102,7 @@ const UserInformation = () => {
                       </p>
                     </div>
                     <a
-                      href='./payment-details.html'
+                      href='./payment-details'
                       className='-mr-4 -mt-4 flex items-center justify-center rounded-full border border-white/20 p-3 !leading-none text-white hover:bg-white/10 transition-colors'
                     >
                       <i className='ph-thin ph-arrow-up-right'></i>

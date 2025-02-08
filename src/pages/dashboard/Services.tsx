@@ -79,7 +79,7 @@ const Services = () => {
                 </label>
               </div>
               <div className='flex gap-4 lg:flex-col lg:gap-8'>
-                <a href='./edit-services.html'>
+                <a href='./edit-services'>
                   <i className='ph ph-pencil-simple rounded-full bg-b50 p-3 text-2xl !leading-none text-b300'></i>
                 </a>
                 <button>
@@ -162,7 +162,7 @@ const Services = () => {
                 </label>
               </div>
               <div className='flex gap-4 lg:flex-col lg:gap-8'>
-                <a href='./edit-services.html'>
+                <a href='./edit-services'>
                   <i className='ph ph-pencil-simple rounded-full bg-b50 p-3 text-2xl !leading-none text-b300'></i>
                 </a>
                 <button>
@@ -245,7 +245,7 @@ const Services = () => {
                 </label>
               </div>
               <div className='flex gap-4 lg:flex-col lg:gap-8'>
-                <a href='./edit-services.html'>
+                <a href='./edit-services'>
                   <i className='ph ph-pencil-simple rounded-full bg-b50 p-3 text-2xl !leading-none text-b300'></i>
                 </a>
                 <button>
@@ -328,7 +328,7 @@ const Services = () => {
                 </label>
               </div>
               <div className='flex gap-4 lg:flex-col lg:gap-8'>
-                <a href='./edit-services.html'>
+                <a href='./edit-services'>
                   <i className='ph ph-pencil-simple rounded-full bg-b50 p-3 text-2xl !leading-none text-b300'></i>
                 </a>
                 <button>

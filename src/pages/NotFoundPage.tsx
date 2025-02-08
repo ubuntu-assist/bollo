@@ -11,7 +11,7 @@ const NotFoundPage = () => {
         </p>
 
         <a
-          href='./index.html'
+          href='./index'
           className='relative flex max-w-[300px] items-center justify-center overflow-hidden rounded-full bg-b300 px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
         >
           <span className='relative z-10'>Back To Home</span>

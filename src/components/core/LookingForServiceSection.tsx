@@ -53,7 +53,7 @@ const LookingForServiceSection = () => {
           {/* CTA Button */}
           <div>
             <a
-              href='./contact.html'
+              href='./contact'
               className='group relative flex items-center justify-start pr-12 font-semibold'
             >
               <span className='rounded-full bg-[#E31C79] text-white px-6 py-3 duration-500 group-hover:translate-x-12'>

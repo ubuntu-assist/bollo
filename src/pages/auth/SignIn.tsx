@@ -194,7 +194,7 @@ const SignIn = () => {
             <div className='w-full'>
               {/* Forgot Password Link */}
               <a
-                href='./contact.html'
+                href='./contact'
                 className='block py-3 text-end text-sm font-medium text-[#1B3B86] hover:text-[#E31C79] transition-colors'
               >
                 Forgot Password?

@@ -15,7 +15,7 @@ const BecomeYourBossSection = () => {
             {/* CTA Button */}
             <div className='pb-6 pt-6 lg:pt-10'>
               <a
-                href='./sign-up-step-1.html'
+                href='./sign-up-step-1'
                 className='group relative flex items-center justify-start pr-12 font-semibold'
               >
                 <span className='rounded-full bg-[#E31C79] px-6 py-3 text-white duration-500 group-hover:translate-x-12'>

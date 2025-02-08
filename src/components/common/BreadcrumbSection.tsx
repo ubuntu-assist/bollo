@@ -36,7 +36,7 @@ const BreadcrumbSection = () => {
             </p>
             <div className='pt-8'>
               <a
-                href='./working-processed-step-01.html'
+                href='./working-processed-step-01'
                 className='relative flex items-center justify-center overflow-hidden rounded-full bg-[#1B3B86] px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-[#E31C79] after:duration-700 hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
               >
                 <span className='relative z-10'>Post a job for free</span>

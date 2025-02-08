@@ -20,7 +20,7 @@ const TopExpertsSection = () => {
           </div>
           <div>
             <a
-              href='./find-workers.html'
+              href='./find-workers'
               className='flex items-center justify-start gap-3 font-bold text-[#1B3B86] hover:text-[#E31C79] duration-300'
             >
               All Experts

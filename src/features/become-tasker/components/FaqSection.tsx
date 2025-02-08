@@ -60,7 +60,7 @@ const FaqSection = () => {
 
           {/* CTA Button */}
           <a
-            href='./contact.html'
+            href='./contact'
             className='relative flex items-center justify-center overflow-hidden rounded-xl bg-[#E31C79] px-4 py-3 font-semibold text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-xl after:bg-[#1B3B86] after:duration-700 hover:after:w-[calc(100%+2px)] sm:px-8'
           >
             <span className='relative z-10'>Get In Touch</span>

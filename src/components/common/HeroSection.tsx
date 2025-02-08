@@ -120,7 +120,7 @@ const HeroSection = () => {
           {/* CTA Button */}
           <div>
             <a
-              href='./find-workers.html'
+              href='./find-workers'
               className='group relative flex items-center justify-start pr-12 font-semibold'
             >
               <span className='rounded-full bg-[#E31C79] text-white px-6 py-3 duration-500 group-hover:translate-x-12'>
@@ -212,7 +212,7 @@ const HeroSection = () => {
                 className={`relative flex flex-col items-end justify-start gap-10 rounded-md ${slide.bg} pl-6 pt-4 md:pt-8 3xl:gap-3 3xl:px-8`}
               >
                 <a
-                  href='./find-workers.html'
+                  href='./find-workers'
                   className='flex items-center justify-center rounded-full bg-white text-[#1B3B86] p-3 !leading-none duration-500 hover:rotate-45 hover:bg-[#E31C79] hover:text-white max-3xl:mr-4'
                 >
                   <i className='ph-bold ph-arrow-up-right'></i>

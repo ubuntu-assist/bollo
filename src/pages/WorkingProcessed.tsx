@@ -720,12 +720,12 @@ const TaskPostingForm = () => {
             />
             <p className='text-sm text-n300'>
               I agree to the Servibe
-              <a href='./terms-conditions.html' className='text-b300'>
+              <a href='./terms-conditions' className='text-b300'>
                 {' '}
                 Terms & Conditions
               </a>
               , Community Guidelines, and
-              <a href='./privacy-policy.html' className='text-b300'>
+              <a href='./privacy-policy' className='text-b300'>
                 {' '}
                 Privacy Policy
               </a>

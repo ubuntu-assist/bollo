@@ -32,7 +32,7 @@ const FixedPriceServiceSection = () => {
 
           <div className='pt-6 lg:pt-10'>
             <a
-              href='./sign-up-step-1.html'
+              href='./sign-up-step-1'
               className='group relative flex items-center justify-start pr-12 font-semibold'
             >
               <span className='rounded-full bg-[#E31C79] text-white px-6 py-3 duration-500 group-hover:translate-x-12'>
