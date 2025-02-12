@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import workersProfileServiceImg1 from '../../assets/images/workers_profile_service_img1.png'
 import workersProfileServiceImg2 from '../../assets/images/workers_profile_service_img2.png'
 import workersProfileServiceImg3 from '../../assets/images/workers_profile_service_img3.png'
@@ -55,13 +56,13 @@ const ProfileSection = () => {
               </a>
             </div>
 
-            <a
-              href='./worker-portfolio'
+            <Link
+              to='/worker-portfolio'
               className='mt-5 flex w-full items-center justify-between rounded-xl border border-n30 px-5 py-3'
             >
               <p className='font-semibold'>View My Portfolio</p>
               <i className='ph ph-caret-right text-xl !leading-none'></i>
-            </a>
+            </Link>
 
             <div className='mt-5 flex w-full items-center justify-between rounded-xl border border-n30 px-5 py-3'>
               <div className='flex items-center justify-start gap-2'>

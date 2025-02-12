@@ -4,31 +4,55 @@ import googleIcon from '../../../assets/images/google_icon.png'
 import facebookIcon from '../../../assets/images/facebook_icon.png'
 import { Link } from 'react-router'
 
-interface FormData {
-  name: string
+type UserType = 'customer' | 'serviceProvider'
+
+interface BaseFormData {
   email: string
   password: string
+  location: string
+  profilePhoto: File | null
+  photoPreview: string | null
+  userType: UserType
+}
+
+interface CustomerFormData extends BaseFormData {
+  firstName: string
+  lastName: string
+}
+
+interface ServiceProviderFormData extends BaseFormData {
+  name: string
   companyName: string
   isIndividual: boolean
   professionalTitle: string
-  location: string
-  linkedinUrl: string
-  noLinkedin: boolean
-  profilePhoto: File | null
-  photoPreview: string | null
 }
 
+type FormData = CustomerFormData | ServiceProviderFormData
+
 interface FormErrors {
+  firstName?: string
+  lastName?: string
   name?: string
   email?: string
   password?: string
   companyName?: string
   professionalTitle?: string
   location?: string
-  linkedinUrl?: string
+  userType?: string
 }
 
-const initialFormData: FormData = {
+const initialCustomerData: CustomerFormData = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  location: '',
+  profilePhoto: null,
+  photoPreview: null,
+  userType: 'customer',
+}
+
+const initialServiceProviderData: ServiceProviderFormData = {
   name: '',
   email: '',
   password: '',
@@ -36,10 +60,9 @@ const initialFormData: FormData = {
   isIndividual: false,
   professionalTitle: '',
   location: '',
-  linkedinUrl: '',
-  noLinkedin: false,
   profilePhoto: null,
   photoPreview: null,
+  userType: 'serviceProvider',
 }
 
 const validateEmail = (email: string): boolean => {
@@ -56,8 +79,22 @@ const validateStep = (step: number, formData: FormData): FormErrors => {
 
   switch (step) {
     case 1:
-      if (!formData.name.trim()) {
-        errors.name = 'Name is required'
+      if (!formData.userType) {
+        errors.userType = 'Please select user type'
+      }
+      if (formData.userType === 'customer') {
+        const customerData = formData as CustomerFormData
+        if (!customerData.firstName.trim()) {
+          errors.firstName = 'First name is required'
+        }
+        if (!customerData.lastName.trim()) {
+          errors.lastName = 'Last name is required'
+        }
+      } else {
+        const providerData = formData as ServiceProviderFormData
+        if (!providerData.name.trim()) {
+          errors.name = 'Name is required'
+        }
       }
       if (!formData.email.trim()) {
         errors.email = 'Email is required'
@@ -72,20 +109,17 @@ const validateStep = (step: number, formData: FormData): FormErrors => {
       break
 
     case 2:
-      if (!formData.isIndividual && !formData.companyName.trim()) {
-        errors.companyName = 'Company name is required'
-      }
-      break
-
-    case 3:
-      if (!formData.professionalTitle.trim()) {
-        errors.professionalTitle = 'Professional title is required'
+      if (formData.userType === 'serviceProvider') {
+        const providerData = formData as ServiceProviderFormData
+        if (!providerData.isIndividual && !providerData.companyName.trim()) {
+          errors.companyName = 'Company name is required'
+        }
+        if (!providerData.professionalTitle.trim()) {
+          errors.professionalTitle = 'Professional title is required'
+        }
       }
       if (!formData.location.trim()) {
         errors.location = 'Location is required'
-      }
-      if (!formData.noLinkedin && !formData.linkedinUrl.trim()) {
-        errors.linkedinUrl = 'LinkedIn URL is required'
       }
       break
   }
@@ -95,10 +129,17 @@ const validateStep = (step: number, formData: FormData): FormErrors => {
 
 const MultiStepForm: React.FC = () => {
   const [step, setStep] = useState<number>(1)
-  const [formData, setFormData] = useState<FormData>(initialFormData)
+  const [formData, setFormData] = useState<FormData>(initialCustomerData)
   const [errors, setErrors] = useState<FormErrors>({})
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const [tempImageUrl, setTempImageUrl] = useState<string | null>(null)
+
+  const handleUserTypeChange = (type: UserType) => {
+    setFormData(
+      type === 'customer' ? initialCustomerData : initialServiceProviderData
+    )
+    setErrors({})
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value, type, checked } = e.target
@@ -107,7 +148,6 @@ const MultiStepForm: React.FC = () => {
       [name]: type === 'checkbox' ? checked : value,
     }))
 
-    // Clear error when user starts typing
     if (errors[name as keyof FormErrors]) {
       setErrors((prev) => ({
         ...prev,
@@ -154,18 +194,18 @@ const MultiStepForm: React.FC = () => {
       return
     }
 
-    if (step < 3) {
+    if (
+      (formData.userType === 'customer' && step < 2) ||
+      (formData.userType === 'serviceProvider' && step < 2)
+    ) {
       setStep((prev) => prev + 1)
       setErrors({})
     } else {
       try {
-        // Here you would typically send the data to your backend
         console.log('Form submitted:', formData)
         // await submitFormData(formData);
-        // Handle successful submission
       } catch (error) {
         console.error('Submission error:', error)
-        // Handle submission error
       }
     }
   }
@@ -177,28 +217,101 @@ const MultiStepForm: React.FC = () => {
     }
   }
 
+  const renderUserTypeSelection = () => (
+    <div className='flex gap-4 mb-6'>
+      <button
+        type='button'
+        onClick={() => handleUserTypeChange('customer')}
+        className={`flex-1 py-3 px-4 rounded-xl font-semibold ${
+          formData.userType === 'customer'
+            ? 'bg-b300 text-white'
+            : 'bg-gray-200 text-gray-700'
+        }`}
+      >
+        Customer
+      </button>
+      <button
+        type='button'
+        onClick={() => handleUserTypeChange('serviceProvider')}
+        className={`flex-1 py-3 px-4 rounded-xl font-semibold ${
+          formData.userType === 'serviceProvider'
+            ? 'bg-b300 text-white'
+            : 'bg-gray-200 text-gray-700'
+        }`}
+      >
+        Service Provider
+      </button>
+    </div>
+  )
+
   const renderStep1 = () => (
     <div className='flex flex-col gap-6'>
-      <div className='flex flex-col gap-2'>
-        <div
-          className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
-            errors.name ? 'border-red-500' : 'border-[#1B3B86]/10'
-          } bg-[#1B3B86]/5 px-4 py-3 focus-within:border-[#E31C79] transition-colors`}
-        >
-          <i className='ph ph-user text-2xl !leading-none text-[#1B3B86]'></i>
-          <input
-            type='text'
-            name='name'
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder='Enter Your Name'
-            className='w-full text-sm text-gray-600 outline-none bg-transparent placeholder:text-gray-500'
-          />
+      {formData.userType === 'customer' ? (
+        <>
+          <div className='flex flex-col gap-2'>
+            <div
+              className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
+                errors.firstName ? 'border-red-500' : 'border-[#1B3B86]/10'
+              } bg-[#1B3B86]/5 px-4 py-3 focus-within:border-[#E31C79] transition-colors`}
+            >
+              <i className='ph ph-user text-2xl !leading-none text-[#1B3B86]'></i>
+              <input
+                type='text'
+                name='firstName'
+                value={(formData as CustomerFormData).firstName}
+                onChange={handleInputChange}
+                placeholder='First Name'
+                className='w-full text-sm text-gray-600 outline-none bg-transparent placeholder:text-gray-500'
+              />
+            </div>
+            {errors.firstName && (
+              <span className='text-xs text-red-500'>{errors.firstName}</span>
+            )}
+          </div>
+
+          <div className='flex flex-col gap-2'>
+            <div
+              className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
+                errors.lastName ? 'border-red-500' : 'border-[#1B3B86]/10'
+              } bg-[#1B3B86]/5 px-4 py-3 focus-within:border-[#E31C79] transition-colors`}
+            >
+              <i className='ph ph-user text-2xl !leading-none text-[#1B3B86]'></i>
+              <input
+                type='text'
+                name='lastName'
+                value={(formData as CustomerFormData).lastName}
+                onChange={handleInputChange}
+                placeholder='Last Name'
+                className='w-full text-sm text-gray-600 outline-none bg-transparent placeholder:text-gray-500'
+              />
+            </div>
+            {errors.lastName && (
+              <span className='text-xs text-red-500'>{errors.lastName}</span>
+            )}
+          </div>
+        </>
+      ) : (
+        <div className='flex flex-col gap-2'>
+          <div
+            className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
+              errors.name ? 'border-red-500' : 'border-[#1B3B86]/10'
+            } bg-[#1B3B86]/5 px-4 py-3 focus-within:border-[#E31C79] transition-colors`}
+          >
+            <i className='ph ph-user text-2xl !leading-none text-[#1B3B86]'></i>
+            <input
+              type='text'
+              name='name'
+              value={(formData as ServiceProviderFormData).name}
+              onChange={handleInputChange}
+              placeholder='Full Name'
+              className='w-full text-sm text-gray-600 outline-none bg-transparent placeholder:text-gray-500'
+            />
+          </div>
+          {errors.name && (
+            <span className='text-xs text-red-500'>{errors.name}</span>
+          )}
         </div>
-        {errors.name && (
-          <span className='text-xs text-red-500'>{errors.name}</span>
-        )}
-      </div>
+      )}
 
       <div className='flex flex-col gap-2'>
         <div
@@ -246,65 +359,67 @@ const MultiStepForm: React.FC = () => {
 
   const renderStep2 = () => (
     <div className='flex flex-col gap-6'>
-      <div className='flex flex-col gap-2'>
-        <div
-          className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
-            errors.companyName ? 'border-red-500' : 'border-n30'
-          } px-4 py-3`}
-        >
-          <i className='ph ph-user text-2xl !leading-none'></i>
-          <input
-            type='text'
-            name='companyName'
-            value={formData.companyName}
-            onChange={handleInputChange}
-            placeholder='Enter Company Name'
-            className='w-full text-sm text-n300 outline-none'
-            disabled={formData.isIndividual}
-          />
-        </div>
-        {errors.companyName && (
-          <span className='text-xs text-red-500'>{errors.companyName}</span>
-        )}
-      </div>
+      {formData.userType === 'serviceProvider' && (
+        <>
+          <div className='flex flex-col gap-2'>
+            <div
+              className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
+                errors.companyName ? 'border-red-500' : 'border-n30'
+              } px-4 py-3`}
+            >
+              <i className='ph ph-buildings text-2xl !leading-none'></i>
+              <input
+                type='text'
+                name='companyName'
+                value={(formData as ServiceProviderFormData).companyName}
+                onChange={handleInputChange}
+                placeholder='Enter Company Name'
+                className='w-full text-sm text-n300 outline-none'
+                disabled={(formData as ServiceProviderFormData).isIndividual}
+              />
+            </div>
+            {errors.companyName && (
+              <span className='text-xs text-red-500'>{errors.companyName}</span>
+            )}
+          </div>
 
-      <div className='flex items-center justify-start gap-3'>
-        <input
-          type='checkbox'
-          name='isIndividual'
-          checked={formData.isIndividual}
-          onChange={handleInputChange}
-          className='h-4 w-4'
-        />
-        <p className='text-sm text-n300'>I'm hiring as an individual</p>
-      </div>
-    </div>
-  )
+          <div className='flex items-center justify-start gap-3'>
+            <input
+              type='checkbox'
+              name='isIndividual'
+              checked={(formData as ServiceProviderFormData).isIndividual}
+              onChange={handleInputChange}
+              className='h-4 w-4'
+            />
+            <p className='text-sm text-n300'>
+              I'm providing services as an individual
+            </p>
+          </div>
 
-  const renderStep3 = () => (
-    <div className='flex flex-col gap-6'>
-      <div className='flex flex-col gap-2'>
-        <div
-          className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
-            errors.professionalTitle ? 'border-red-500' : 'border-n30'
-          } px-4 py-3`}
-        >
-          <i className='ph ph-briefcase text-2xl !leading-none'></i>
-          <input
-            type='text'
-            name='professionalTitle'
-            value={formData.professionalTitle}
-            onChange={handleInputChange}
-            placeholder='Professional Title'
-            className='w-full text-sm text-n300 outline-none'
-          />
-        </div>
-        {errors.professionalTitle && (
-          <span className='text-xs text-red-500'>
-            {errors.professionalTitle}
-          </span>
-        )}
-      </div>
+          <div className='flex flex-col gap-2'>
+            <div
+              className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
+                errors.professionalTitle ? 'border-red-500' : 'border-n30'
+              } px-4 py-3`}
+            >
+              <i className='ph ph-briefcase text-2xl !leading-none'></i>
+              <input
+                type='text'
+                name='professionalTitle'
+                value={(formData as ServiceProviderFormData).professionalTitle}
+                onChange={handleInputChange}
+                placeholder='Professional Title'
+                className='w-full text-sm text-n300 outline-none'
+              />
+            </div>
+            {errors.professionalTitle && (
+              <span className='text-xs text-red-500'>
+                {errors.professionalTitle}
+              </span>
+            )}
+          </div>
+        </>
+      )}
 
       <div className='flex flex-col gap-2'>
         <div
@@ -325,39 +440,6 @@ const MultiStepForm: React.FC = () => {
         {errors.location && (
           <span className='text-xs text-red-500'>{errors.location}</span>
         )}
-      </div>
-
-      <div className='flex flex-col gap-2'>
-        <div
-          className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
-            errors.linkedinUrl ? 'border-red-500' : 'border-n30'
-          } px-4 py-3`}
-        >
-          <i className='ph ph-linkedin-logo text-2xl !leading-none'></i>
-          <input
-            type='text'
-            name='linkedinUrl'
-            value={formData.linkedinUrl}
-            onChange={handleInputChange}
-            placeholder='LinkedIn URL'
-            className='w-full text-sm text-n300 outline-none'
-            disabled={formData.noLinkedin}
-          />
-        </div>
-        {errors.linkedinUrl && (
-          <span className='text-xs text-red-500'>{errors.linkedinUrl}</span>
-        )}
-      </div>
-
-      <div className='flex items-center justify-start gap-3'>
-        <input
-          type='checkbox'
-          name='noLinkedin'
-          checked={formData.noLinkedin}
-          onChange={handleInputChange}
-          className='h-4 w-4'
-        />
-        <p className='text-sm text-n300'>I don't have a LinkedIn account</p>
       </div>
 
       <div className=''>
@@ -404,9 +486,9 @@ const MultiStepForm: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit} className='flex w-full flex-col pt-6'>
+      {renderUserTypeSelection()}
       {step === 1 && renderStep1()}
       {step === 2 && renderStep2()}
-      {step === 3 && renderStep3()}
 
       <div className='w-full mt-6'>
         {/* Navigation Buttons */}
@@ -427,7 +509,7 @@ const MultiStepForm: React.FC = () => {
             }`}
           >
             <span className='relative z-10'>
-              {step === 3 ? 'Complete Signup' : 'Continue'}
+              {step === 2 ? 'Complete Signup' : 'Continue'}
             </span>
           </button>
         </div>
@@ -441,14 +523,24 @@ const MultiStepForm: React.FC = () => {
 
         {step === 1 && (
           <div className='flex flex-col gap-3 mt-6'>
-            <button className='flex w-full items-center justify-center gap-2 rounded-2xl border border-[#1B3B86]/10 bg-white py-3 hover:bg-[#1B3B86]/5 transition-colors'>
+            <button
+              type='button'
+              className='flex w-full items-center justify-center gap-2 rounded-2xl border border-[#1B3B86]/10 bg-white py-3 hover:bg-[#1B3B86]/5 transition-colors'
+            >
               <img src={googleIcon} alt='Sign in with Google' />
-              <span className='text-sm text-gray-900'>Google</span>
+              <span className='text-sm text-gray-900'>
+                Continue with Google
+              </span>
             </button>
 
-            <button className='flex w-full items-center justify-center gap-2 rounded-2xl border border-[#1B3B86]/10 bg-white py-3 hover:bg-[#1B3B86]/5 transition-colors'>
+            <button
+              type='button'
+              className='flex w-full items-center justify-center gap-2 rounded-2xl border border-[#1B3B86]/10 bg-white py-3 hover:bg-[#1B3B86]/5 transition-colors'
+            >
               <img src={facebookIcon} alt='Sign in with Facebook' />
-              <span className='text-sm text-gray-900'>Facebook</span>
+              <span className='text-sm text-gray-900'>
+                Continue with Facebook
+              </span>
             </button>
           </div>
         )}

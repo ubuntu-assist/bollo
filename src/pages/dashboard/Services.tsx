@@ -1,3 +1,4 @@
+import { Link } from 'react-router'
 import dashboardServiceImg1 from '../../assets/images/dashboard-services-img1.png'
 import dashboardServiceImg2 from '../../assets/images/dashboard-services-img2.png'
 import dashboardServiceImg3 from '../../assets/images/dashboard-services-img3.png'
@@ -79,9 +80,9 @@ const Services = () => {
                 </label>
               </div>
               <div className='flex gap-4 lg:flex-col lg:gap-8'>
-                <a href='./edit-services'>
+                <Link to='/services/slug/edit'>
                   <i className='ph ph-pencil-simple rounded-full bg-b50 p-3 text-2xl !leading-none text-b300'></i>
-                </a>
+                </Link>
                 <button>
                   <i className='ph ph-trash rounded-full bg-r50 p-3 text-2xl !leading-none text-r300'></i>
                 </button>

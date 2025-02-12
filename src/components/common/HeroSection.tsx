@@ -79,7 +79,7 @@ const HeroSection = () => {
           data-aos-duration='1500'
         >
           <h5 className='heading-5 pb-3 font-[700] text-[#E31C79]'>
-            Your Solution Hub
+            Your Trusted Service Partner
           </h5>
           <div className='relative'>
             <h1 className='sm:display-3 text-[32px] font-[800] text-gray-900 max-sm:pr-10'>
@@ -121,7 +121,7 @@ const HeroSection = () => {
           {/* CTA Button */}
           <div>
             <Link
-              to='/signin'
+              to='/services'
               className='group relative flex items-center justify-start pr-12 font-semibold'
             >
               <span className='rounded-full bg-[#E31C79] text-white px-6 py-3 duration-500 group-hover:translate-x-12'>

@@ -3,11 +3,15 @@ import BecomeTasker from './BecomeTasker'
 import Services from './Services'
 import ServiceDetails from './ServiceDetails'
 import HireMe from './HireMe'
-import WorkerProfile from './WorkerProfile'
+import WorkerProfile from './worker/WorkerProfile'
 import NotFoundPage from './NotFoundPage'
 import SignIn from './auth/SignIn'
 import SignUp from './auth/SignUp'
 import WorkingProcessed from './WorkingProcessed'
+import BrowseTasks from './BrowseTasks'
+import FindWorkers from './worker/FindWorkers'
+import WorkerPortfolio from './worker/WorkerPortfolio'
+import ChatPage from './worker/ChatPage'
 
 export {
   Home,
@@ -20,4 +24,8 @@ export {
   SignIn,
   SignUp,
   WorkingProcessed,
+  BrowseTasks,
+  FindWorkers,
+  WorkerPortfolio,
+  ChatPage,
 }

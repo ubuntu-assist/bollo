@@ -2,22 +2,59 @@ import { Link } from 'react-router'
 import { useState } from 'react'
 import logo from '../../assets/images/logo.png'
 
+interface NavOption {
+  title: string
+  url: string
+}
+
+interface NavItem {
+  name: string
+  type: 'link' | 'dropdown'
+  to?: string
+  options?: NavOption[]
+}
+
+interface Language {
+  code: string
+  name: string
+  flag: string
+}
+
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null)
+  const [currentLanguage, setCurrentLanguage] = useState<string>('en')
 
-  const navItems = [
+  const languages: Language[] = [
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  ]
+
+  const navItems: NavItem[] = [
     { name: 'Home', type: 'link', to: '/' },
-    { name: 'Services', type: 'link', to: '/services' },
+    {
+      name: 'Services',
+      type: 'dropdown',
+      options: [
+        { title: 'All Services', url: '/services' },
+        { title: 'Browse Tasks', url: '/browse-tasks' },
+      ],
+    },
     {
       name: 'Workers',
       type: 'dropdown',
-      options: ['Option 1', 'Option 2'],
+      options: [
+        { title: 'Find Workers', url: '/find-workers' },
+        { title: 'Worker Directory', url: '/worker-directory' },
+      ],
     },
     {
       name: 'Pages',
       type: 'dropdown',
-      options: ['Option 1', 'Option 2'],
+      options: [
+        { title: 'About Us', url: '/about' },
+        { title: 'Contact', url: '/contact' },
+      ],
     },
   ]
 
@@ -25,6 +62,15 @@ const Header = () => {
 
   const toggleSubmenu = (name: string) => {
     setActiveSubmenu(activeSubmenu === name ? null : name)
+  }
+
+  const handleLanguageChange = (code: string) => {
+    setCurrentLanguage(code)
+    // Here you would typically implement your language change logic
+  }
+
+  const getCurrentLanguage = () => {
+    return languages.find((lang) => lang.code === currentLanguage)
   }
 
   return (
@@ -62,12 +108,12 @@ const Header = () => {
                       </div>
                       <ul className='invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute left-0 top-full w-48 bg-[#1B3B86] rounded-lg py-4 transition-all'>
                         {item.options!.map((option) => (
-                          <li key={option}>
+                          <li key={option.title}>
                             <Link
-                              to='#'
+                              to={option.url}
                               className='block px-6 py-2 text-white hover:text-[#E31C79] transition-colors'
                             >
-                              {option}
+                              {option.title}
                             </Link>
                           </li>
                         ))}
@@ -81,6 +127,28 @@ const Header = () => {
 
           <div className='flex items-center gap-6'>
             <div className='hidden sm:flex items-center gap-6'>
+              {/* Language Selector */}
+              <div className='group relative'>
+                <button className='flex items-center gap-2 px-2 py-3 text-[#1B3B86] hover:text-[#E31C79] transition-colors'>
+                  <span>{getCurrentLanguage()?.flag}</span>
+                  <span>{getCurrentLanguage()?.code.toUpperCase()}</span>
+                  <i className='ph ph-caret-down transition-transform group-hover:rotate-180'></i>
+                </button>
+                <ul className='invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute right-0 top-full w-48 bg-[#1B3B86] rounded-lg py-4 transition-all'>
+                  {languages.map((lang) => (
+                    <li key={lang.code}>
+                      <button
+                        onClick={() => handleLanguageChange(lang.code)}
+                        className='w-full text-left px-6 py-2 text-white hover:text-[#E31C79] transition-colors flex items-center gap-2'
+                      >
+                        <span>{lang.flag}</span>
+                        <span>{lang.name}</span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
               <Link
                 to='/signin'
                 className='text-[#1B3B86] hover:text-[#E31C79] transition-colors'
@@ -127,6 +195,30 @@ const Header = () => {
               <i className='ph ph-x text-2xl'></i>
             </button>
 
+            {/* Language Selector for Mobile */}
+            <div className='mb-6'>
+              <div className='text-white/80 mb-2'>Select Language</div>
+              <div className='grid grid-cols-2 gap-2'>
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => {
+                      handleLanguageChange(lang.code)
+                      toggleMobileMenu()
+                    }}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
+                      currentLanguage === lang.code
+                        ? 'bg-[#E31C79] text-white'
+                        : 'text-white/80 hover:text-white'
+                    }`}
+                  >
+                    <span>{lang.flag}</span>
+                    <span>{lang.name}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+
             <ul className='space-y-4'>
               {navItems.map((item) => (
                 <li key={item.name}>
@@ -157,13 +249,13 @@ const Header = () => {
                         }`}
                       >
                         {item.options!.map((option) => (
-                          <li key={option}>
+                          <li key={option.title}>
                             <Link
-                              to='#'
+                              to={option.url}
                               className='block py-2 text-white/80 hover:text-[#E31C79] transition-colors'
                               onClick={toggleMobileMenu}
                             >
-                              {option}
+                              {option.title}
                             </Link>
                           </li>
                         ))}

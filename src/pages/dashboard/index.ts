@@ -6,6 +6,7 @@ import Settings from './Settings'
 import DashboardServices from './Services'
 import Reviews from './Reviews'
 import Payments from './Payments'
+import AddEditService from './AddEditService'
 
 export {
   DashboardHome,
@@ -16,4 +17,5 @@ export {
   DashboardServices,
   Reviews,
   Payments,
+  AddEditService,
 }

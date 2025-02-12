@@ -9,6 +9,7 @@ import peopleSmall2 from '../../assets/images/people_small2.png'
 import peopleSmall3 from '../../assets/images/people_small3.png'
 import loginSliderIcon from '../../assets/images/login_slider_icon.png'
 import { MultiStepForm } from '../../features/auth/components'
+import { Link } from 'react-router'
 
 interface TestimonialSlide {
   image: string
@@ -151,15 +152,14 @@ const SignUp = () => {
         <div className='flex h-full w-full max-w-[530px] flex-col items-center justify-center max-lg:px-6 max-lg:pt-40 max-sm:pt-32 lg:ml-20 xl:max-w-[380px] xxl:max-w-[530px] 3xl:ml-40'>
           {/* Logo */}
           <div>
-            <a href='./index'>
+            <Link to='/'>
               <img src={logo} alt='Bollo logo' className='h-24 w-auto' />
-            </a>
+            </Link>
           </div>
 
           {/* Welcome Text */}
           <div className='flex items-center justify-start pt-8'>
             <p className='heading-5 text-gray-900'>Welcome to Bollo</p>
-            <img src='./assets/images/victor_icon.png' alt='' />
           </div>
 
           <MultiStepForm />

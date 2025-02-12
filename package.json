@@ -12,6 +12,9 @@
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@types/matter-js": "^0.19.8",
+    "@web3-onboard/injected-wallets": "^2.11.3",
+    "@web3-onboard/react": "^2.11.0",
+    "@web3-onboard/walletconnect": "^2.6.2",
     "aos": "^2.3.4",
     "appwrite": "^14.0.1",
     "lucide-react": "^0.474.0",
