@@ -92,11 +92,17 @@ const WorkerPortfolio = () => {
           id='about'
         >
           <div className='max-md:overflow-hidden'>
-            <div className='hexagon-styles my-[calc(300px*0.5/2)] h-[calc(300px*0.57736720554273)] w-[300px] rounded-[calc(300px/36.75)] bg-indigo-100 before:rounded-[calc(300px/18.75)] after:rounded-[calc(300px/18.75)]'>
+            <div className='hexagon-styles my-[calc(300px*0.5/2)] h-[calc(300px*0.57736720554273)] w-[300px] rounded-[calc(300px/36.75)] bg-b50 before:rounded-[calc(300px/18.75)] after:rounded-[calc(300px/18.75)]'>
               <div className='absolute -top-[60px] left-4'>
                 <div className='hexagon-styles z-10 my-[calc(270px*0.5/2)] h-[calc(270px*0.57736720554273)] w-[270px] rounded-[calc(270px/50)] bg-indigo-900 before:rounded-[calc(270px/50)] after:rounded-[calc(270px/50)]'>
                   <div className='absolute -top-[55px] left-2.5 z-20'>
-                    <div className='hexagon-styles z-10 my-[calc(250px*0.5/2)] h-[calc(250px*0.57736720554273)] w-[250px] rounded-[calc(250px/50)] bg-indigo-100 before:rounded-[calc(250px/50)] after:rounded-[calc(250px/50)]'></div>
+                    <div className='hexagon-styles z-10 my-[calc(250px*0.5/2)] h-[calc(250px*0.57736720554273)] w-[250px] rounded-[calc(250px/50)] bg-b50 before:rounded-[calc(250px/50)] after:rounded-[calc(250px/50)]'>
+                      <div className='r-hex3 absolute -left-1.5 -top-[56px] z-30 inline-block w-[260px] overflow-hidden'>
+                        <div className='r-hex-inner3'>
+                          <div className='expertImgBig r-hex-inner-3 before:h-[260px] before:bg-cover'></div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -120,7 +126,7 @@ const WorkerPortfolio = () => {
               </h2>
               <div className='flex items-center gap-4 justify-start pt-2'>
                 <img src={bigArrowTwo} alt='location arrow' />
-                <h2 className='heading-2 text-indigo-900'>based in Cameroon</h2>
+                <h2 className='heading-2 text-indigo-900'>based in Kenya</h2>
               </div>
             </div>
             <p

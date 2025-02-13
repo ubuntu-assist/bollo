@@ -79,7 +79,7 @@ const FindWorkers = () => {
                       PRO
                     </p>
                   </div>
-                  <p className='pt-2 text-n500'>Brooklyn, NY, USA</p>
+                  <p className='pt-2 text-n500'>Addis Ababa, Ethiopia</p>
                 </div>
               </div>
 
@@ -229,7 +229,7 @@ const FindWorkers = () => {
                       PRO
                     </p>
                   </div>
-                  <p className='pt-2 text-n500'>Brooklyn, NY, USA</p>
+                  <p className='pt-2 text-n500'>Addis Ababa, Ethiopia</p>
                 </div>
               </div>
 
@@ -379,7 +379,7 @@ const FindWorkers = () => {
                       PRO
                     </p>
                   </div>
-                  <p className='pt-2 text-n500'>Brooklyn, NY, USA</p>
+                  <p className='pt-2 text-n500'>Addis Ababa, Ethiopia</p>
                 </div>
               </div>
 
@@ -530,7 +530,7 @@ const FindWorkers = () => {
                       PRO
                     </p>
                   </div>
-                  <p className='pt-2 text-n500'>Brooklyn, NY, USA</p>
+                  <p className='pt-2 text-n500'>Addis Ababa, Ethiopia</p>
                 </div>
               </div>
 
@@ -681,7 +681,7 @@ const FindWorkers = () => {
                       PRO
                     </p>
                   </div>
-                  <p className='pt-2 text-n500'>Brooklyn, NY, USA</p>
+                  <p className='pt-2 text-n500'>Addis Ababa, Ethiopia</p>
                 </div>
               </div>
 
@@ -831,7 +831,7 @@ const FindWorkers = () => {
                       PRO
                     </p>
                   </div>
-                  <p className='pt-2 text-n500'>Brooklyn, NY, USA</p>
+                  <p className='pt-2 text-n500'>Addis Ababa, Ethiopia</p>
                 </div>
               </div>
 
@@ -980,7 +980,7 @@ const FindWorkers = () => {
                       PRO
                     </p>
                   </div>
-                  <p className='pt-2 text-n500'>Brooklyn, NY, USA</p>
+                  <p className='pt-2 text-n500'>Addis Ababa, Ethiopia</p>
                 </div>
               </div>
 
@@ -1130,7 +1130,7 @@ const FindWorkers = () => {
                       PRO
                     </p>
                   </div>
-                  <p className='pt-2 text-n500'>Brooklyn, NY, USA</p>
+                  <p className='pt-2 text-n500'>Addis Ababa, Ethiopia</p>
                 </div>
               </div>
 
@@ -1280,7 +1280,7 @@ const FindWorkers = () => {
                       PRO
                     </p>
                   </div>
-                  <p className='pt-2 text-n500'>Brooklyn, NY, USA</p>
+                  <p className='pt-2 text-n500'>Addis Ababa, Ethiopia</p>
                 </div>
               </div>
 

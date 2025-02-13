@@ -6,6 +6,7 @@ import {
   BecomeTasker,
   BrowseTasks,
   ChatPage,
+  EscrowPayment,
   FindWorkers,
   HireMe,
   Home,
@@ -14,6 +15,7 @@ import {
   Services,
   SignIn,
   SignUp,
+  SmartContractForm,
   WorkerPortfolio,
   WorkerProfile,
   WorkingProcessed,
@@ -65,7 +67,9 @@ function App() {
         <Route path='signup' element={<SignUp />} />
         <Route path='*' element={<NotFoundPage />} />
         <Route path='post-task' element={<WorkingProcessed />} />
+        <Route path='create-contract' element={<SmartContractForm />} />
         <Route path='worker-portfolio' element={<WorkerPortfolio />} />
+        <Route path='pay' element={<EscrowPayment />} />
       </Routes>
     </BrowserRouter>
   )

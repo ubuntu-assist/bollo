@@ -12,6 +12,8 @@ import BrowseTasks from './BrowseTasks'
 import FindWorkers from './worker/FindWorkers'
 import WorkerPortfolio from './worker/WorkerPortfolio'
 import ChatPage from './worker/ChatPage'
+import SmartContractForm from './ContractPage'
+import EscrowPayment from './EscrowPayment'
 
 export {
   Home,
@@ -28,4 +30,6 @@ export {
   FindWorkers,
   WorkerPortfolio,
   ChatPage,
+  SmartContractForm,
+  EscrowPayment,
 }

@@ -38,7 +38,7 @@ const web3Onboard = init({
     icon: logo,
     description: 'Bollo connects trusted home service providers with customers',
   },
-  theme: 'dark',
+  theme: 'light',
 })
 
 createRoot(document.getElementById('root')!).render(

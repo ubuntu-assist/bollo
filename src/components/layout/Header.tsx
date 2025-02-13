@@ -167,10 +167,10 @@ const Header = () => {
               </Link>
 
               <Link
-                to='/become-tasker'
+                to='/create-contract'
                 className='hidden xl:flex items-center px-8 py-3 rounded-full border-2 border-[#1B3B86] text-[#1B3B86] hover:bg-[#E31C79] hover:border-[#E31C79] hover:text-white transition-colors'
               >
-                Become a Tasker
+                Create a Contract
               </Link>
             </div>
           </div>

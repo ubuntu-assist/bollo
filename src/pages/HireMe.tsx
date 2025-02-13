@@ -1,53 +1,93 @@
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
+import React from 'react'
 import verifyBadge from '../assets/images/verify-badge.png'
 import { getCurrentDateTime, isDateTimeInFuture } from '../utils/date-time'
 
+interface FormData {
+  date: string
+  time: string
+  message: string
+  price: string
+}
+
+interface FormErrors {
+  date?: string
+  time?: string
+  message?: string
+  price?: string
+}
+
 const { date: currentDate, time: currentTime } = getCurrentDateTime()
 
-const hireFormSchema = z
-  .object({
-    date: z.string().min(1, 'Please select a date'),
-    time: z.string().min(1, 'Please select a time'),
-    message: z
-      .string()
-      .min(10, 'Message must be at least 10 characters')
-      .max(500, 'Message cannot exceed 500 characters'),
-  })
-  .refine((data) => isDateTimeInFuture(data.date, data.time), {
-    message: 'Selected date and time must be in the future',
-    path: ['time'],
-  })
-
-type HireFormData = z.infer<typeof hireFormSchema>
-
-const defaultValues: HireFormData = {
+const defaultValues: FormData = {
   date: currentDate,
   time: currentTime,
   message: '',
+  price: '',
 }
 
-const HireMe = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    watch,
-  } = useForm<HireFormData>({
-    resolver: zodResolver(hireFormSchema),
-    defaultValues,
-  })
+const HireMe: React.FC = () => {
+  const [formData, setFormData] = React.useState<FormData>(defaultValues)
+  const [errors, setErrors] = React.useState<FormErrors>({})
 
-  const onSubmit = (data: HireFormData) => {
-    console.log('Form submitted:', data)
+  const validateForm = (data: FormData): FormErrors => {
+    const newErrors: FormErrors = {}
+
+    if (!data.date) {
+      newErrors.date = 'Please select a date'
+    }
+
+    if (!data.time) {
+      newErrors.time = 'Please select a time'
+    }
+
+    if (!isDateTimeInFuture(data.date, data.time)) {
+      newErrors.time = 'Selected date and time must be in the future'
+    }
+
+    if (!data.message || data.message.length < 10) {
+      newErrors.message = 'Message must be at least 10 characters'
+    }
+
+    if (data.message && data.message.length > 500) {
+      newErrors.message = 'Message cannot exceed 500 characters'
+    }
+
+    if (
+      !data.price ||
+      isNaN(Number(data.price)) ||
+      parseFloat(data.price) <= 0
+    ) {
+      newErrors.price = 'Please enter a valid price'
+    }
+
+    return newErrors
   }
 
-  const selectedDate = watch('date')
-  const isToday = selectedDate === currentDate
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault()
+    const newErrors = validateForm(formData)
+
+    if (Object.keys(newErrors).length === 0) {
+      console.log('Form submitted:', formData)
+    } else {
+      setErrors(newErrors)
+    }
+  }
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const isToday = formData.date === currentDate
 
   return (
-    <section className='sbp-30 mt-[140px]'>
+    <section className='mt-28 sbp-30'>
       <div className='container grid grid-cols-12 gap-6'>
         {/* Left Profile Section */}
         <div className='col-span-12 rounded-2xl border border-[#1B3B86]/10 p-4 md:col-span-5 lg:p-8'>
@@ -116,71 +156,73 @@ const HireMe = () => {
             Handyman
           </h5>
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className='flex flex-col gap-6 pt-6'
-          >
-            {/* Price Card */}
-            <div className='flex items-center justify-between gap-3 rounded-3xl border border-[#1B3B86]/10 px-6 py-5'>
-              <div className='flex items-center justify-start gap-3'>
-                <img
-                  src='./assets/images/review_people_1.png'
-                  className='size-12 rounded-full'
-                  alt='Reviewer'
+          <form onSubmit={handleSubmit} className='flex flex-col gap-6 pt-6'>
+            {/* Price Input */}
+            <div className='relative'>
+              <div className='rounded-2xl border border-[#1B3B86]/10 bg-[#1B3B86]/5 px-4 py-3'>
+                <input
+                  type='number'
+                  name='price'
+                  value={formData.price}
+                  onChange={handleChange}
+                  placeholder='Enter price'
+                  className='w-full bg-transparent outline-none '
+                  min='0'
+                  step='0.01'
                 />
-                <div>
-                  <p className='pb-1 font-medium text-gray-900'>Jenny Wilson</p>
-                  <p className='text-sm text-gray-600'>life blogger</p>
-                </div>
               </div>
-              <p className='heading-4 text-[#E31C79]'>$245</p>
+              {errors.price && (
+                <p className='mt-1 text-sm text-red-500'>{errors.price}</p>
+              )}
             </div>
 
-            {/* Form Fields */}
+            {/* Date Input */}
             <div className='relative'>
               <div className='rounded-2xl border border-[#1B3B86]/10 bg-[#1B3B86]/5 px-4 py-3'>
                 <input
                   type='date'
-                  {...register('date')}
+                  name='date'
+                  value={formData.date}
+                  onChange={handleChange}
                   min={currentDate}
-                  className='w-full bg-transparent outline-none focus:ring-2 focus:ring-[#E31C79]'
+                  className='w-full bg-transparent outline-none '
                 />
               </div>
               {errors.date && (
-                <p className='mt-1 text-sm text-red-500'>
-                  {errors.date.message}
-                </p>
+                <p className='mt-1 text-sm text-red-500'>{errors.date}</p>
               )}
             </div>
 
+            {/* Time Input */}
             <div className='relative'>
               <div className='rounded-2xl border border-[#1B3B86]/10 bg-[#1B3B86]/5 px-4 py-3'>
                 <input
                   type='time'
-                  {...register('time')}
+                  name='time'
+                  value={formData.time}
+                  onChange={handleChange}
                   min={isToday ? currentTime : undefined}
-                  className='w-full bg-transparent outline-none focus:ring-2 focus:ring-[#E31C79]'
+                  className='w-full bg-transparent outline-none '
                 />
               </div>
               {errors.time && (
-                <p className='mt-1 text-sm text-red-500'>
-                  {errors.time.message}
-                </p>
+                <p className='mt-1 text-sm text-red-500'>{errors.time}</p>
               )}
             </div>
 
+            {/* Message Input */}
             <div className='relative'>
               <div className='rounded-2xl border border-[#1B3B86]/10 bg-[#1B3B86]/5 px-4 py-3'>
                 <textarea
-                  {...register('message')}
+                  name='message'
+                  value={formData.message}
+                  onChange={handleChange}
                   placeholder='Message'
-                  className='min-h-[150px] w-full bg-transparent outline-none focus:ring-2 focus:ring-[#E31C79]'
+                  className='min-h-[150px] w-full bg-transparent outline-none '
                 ></textarea>
               </div>
               {errors.message && (
-                <p className='mt-1 text-sm text-red-500'>
-                  {errors.message.message}
-                </p>
+                <p className='mt-1 text-sm text-red-500'>{errors.message}</p>
               )}
             </div>
 

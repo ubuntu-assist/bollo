@@ -1,6 +1,5 @@
 import {
   FixedPriceServiceSection,
-  GetHelpTodaySection,
   GetWorkersGigs,
   HeroSection,
   HowItWorksSection,
@@ -25,7 +24,6 @@ const Home = () => {
       <ReviewSection />
       <GetWorkersGigs />
       <RecentPostsSection />
-      <GetHelpTodaySection />
     </>
   )
 }
