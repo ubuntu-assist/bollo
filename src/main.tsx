@@ -14,10 +14,11 @@ const INFURA_KEY = import.meta.env.VITE_INFURA_ID
 
 const chains = [
   {
-    id: 1,
+    id: 11155111,
     token: 'ETH',
-    label: 'Ethereum Mainnet',
-    rpcUrl: `https://mainnet.infura.io/v3/${INFURA_KEY}`,
+    label: 'Sepolia Testnet',
+    rpcUrl: `https://sepolia.infura.io/v3/${INFURA_KEY}`,
+    blockExplorerUrl: 'https://sepolia.etherscan.io',
   },
 ]
 
