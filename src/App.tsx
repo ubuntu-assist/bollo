@@ -11,11 +11,13 @@ import {
   HireMe,
   Home,
   NotFoundPage,
+  ProposalSubmissionPage,
   ServiceDetails,
   Services,
   SignIn,
   SignUp,
   SmartContractForm,
+  TaskDetails,
   WorkerPortfolio,
   WorkerProfile,
   WorkingProcessed,
@@ -52,6 +54,7 @@ function App() {
           <Route path='chat' element={<ChatPage />} />
           <Route path='find-workers' element={<FindWorkers />} />
           <Route path='browse-tasks' element={<BrowseTasks />} />
+          <Route path='task-details' element={<TaskDetails />} />
         </Route>
         <Route path='/dashboard' element={<DashboardLayout />}>
           <Route index element={<DashboardHome />} />
@@ -67,6 +70,10 @@ function App() {
         <Route path='signup' element={<SignUp />} />
         <Route path='*' element={<NotFoundPage />} />
         <Route path='post-task' element={<WorkingProcessed />} />
+        <Route
+          path='proposal-submission'
+          element={<ProposalSubmissionPage />}
+        />
         <Route path='create-contract' element={<SmartContractForm />} />
         <Route path='worker-portfolio' element={<WorkerPortfolio />} />
         <Route path='pay' element={<EscrowPayment />} />

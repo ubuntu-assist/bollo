@@ -14,6 +14,8 @@ import WorkerPortfolio from './worker/WorkerPortfolio'
 import ChatPage from './worker/ChatPage'
 import SmartContractForm from './ContractPage'
 import EscrowPayment from './EscrowPayment'
+import TaskDetails from './TaskDetails'
+import ProposalSubmissionPage from './ProposalSubmissionPage'
 
 export {
   Home,
@@ -32,4 +34,6 @@ export {
   ChatPage,
   SmartContractForm,
   EscrowPayment,
+  TaskDetails,
+  ProposalSubmissionPage,
 }

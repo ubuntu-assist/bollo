@@ -32,7 +32,7 @@ const BrowseTasks = () => {
                 <p className='py-1 font-semibold text-r300'>$80 - &100/hr</p>
                 <p className='pb-6 text-sm'>Fixed Price</p>
                 <a
-                  href='./service-details.html'
+                  href='/task-details'
                   className='block rounded-full border border-n200 px-5 py-2 text-sm'
                 >
                   View Details
