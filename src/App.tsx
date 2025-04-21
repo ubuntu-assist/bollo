@@ -11,6 +11,7 @@ import {
   HireMe,
   Home,
   NotFoundPage,
+  OTPVerification,
   ProposalSubmissionPage,
   ServiceDetails,
   Services,
@@ -68,6 +69,7 @@ function App() {
         </Route>
         <Route path='signin' element={<SignIn />} />
         <Route path='signup' element={<SignUp />} />
+        <Route path='verify' element={<OTPVerification />} />
         <Route path='*' element={<NotFoundPage />} />
         <Route path='post-task' element={<WorkingProcessed />} />
         <Route

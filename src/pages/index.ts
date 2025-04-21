@@ -16,6 +16,7 @@ import SmartContractForm from './ContractPage'
 import EscrowPayment from './EscrowPayment'
 import TaskDetails from './TaskDetails'
 import ProposalSubmissionPage from './ProposalSubmissionPage'
+import OTPVerification from './auth/Verity'
 
 export {
   Home,
@@ -35,5 +36,6 @@ export {
   SmartContractForm,
   EscrowPayment,
   TaskDetails,
+  OTPVerification,
   ProposalSubmissionPage,
 }

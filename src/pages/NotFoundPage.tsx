@@ -1,10 +1,11 @@
 import { Link } from 'react-router'
+import notFoundImg from '../assets/images/not-found-img.png'
 
 const NotFoundPage = () => {
   return (
     <section className='stp-30 flex h-full w-full flex-col items-center justify-center'>
       <div className=''>
-        <img src='./assets/images/not-found-img.png' alt='' />
+        <img src={notFoundImg} alt='' />
       </div>
       <div className='stp-15 flex flex-col items-center justify-center text-center'>
         <h2 className='heading-2'>Page Not Found</h2>

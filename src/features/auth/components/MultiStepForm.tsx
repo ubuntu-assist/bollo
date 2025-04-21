@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import ImageEditorModal from './ImageEditorModal'
 import googleIcon from '../../../assets/images/google_icon.png'
 import facebookIcon from '../../../assets/images/facebook_icon.png'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
+import { isPossiblePhoneNumber } from 'libphonenumber-js'
+import PhoneInput from '@/components/ui/phone-input'
 
 type UserType = 'customer' | 'serviceProvider'
 
@@ -10,6 +12,7 @@ interface BaseFormData {
   email: string
   password: string
   location: string
+  phoneNumber: string
   profilePhoto: File | null
   photoPreview: string | null
   userType: UserType
@@ -35,6 +38,7 @@ interface FormErrors {
   name?: string
   email?: string
   password?: string
+  phoneNumber?: string
   companyName?: string
   professionalTitle?: string
   location?: string
@@ -46,6 +50,7 @@ const initialCustomerData: CustomerFormData = {
   lastName: '',
   email: '',
   password: '',
+  phoneNumber: '',
   location: '',
   profilePhoto: null,
   photoPreview: null,
@@ -56,6 +61,7 @@ const initialServiceProviderData: ServiceProviderFormData = {
   name: '',
   email: '',
   password: '',
+  phoneNumber: '',
   companyName: '',
   isIndividual: false,
   professionalTitle: '',
@@ -63,6 +69,14 @@ const initialServiceProviderData: ServiceProviderFormData = {
   profilePhoto: null,
   photoPreview: null,
   userType: 'serviceProvider',
+}
+
+const validatePhoneNumber = (phoneNumber: string): boolean => {
+  try {
+    return isPossiblePhoneNumber(phoneNumber)
+  } catch (error) {
+    return false
+  }
 }
 
 const validateEmail = (email: string): boolean => {
@@ -106,6 +120,12 @@ const validateStep = (step: number, formData: FormData): FormErrors => {
       } else if (!validatePassword(formData.password)) {
         errors.password = 'Password must be at least 8 characters'
       }
+      if (!formData.phoneNumber) {
+        errors.phoneNumber = 'Phone number is required'
+      } else if (!validatePhoneNumber(formData.phoneNumber)) {
+        errors.phoneNumber = 'Please enter a valid phone number'
+      }
+
       break
 
     case 2:
@@ -133,6 +153,7 @@ const MultiStepForm: React.FC = () => {
   const [errors, setErrors] = useState<FormErrors>({})
   const [isEditorOpen, setIsEditorOpen] = useState(false)
   const [tempImageUrl, setTempImageUrl] = useState<string | null>(null)
+  const navigate = useNavigate()
 
   const handleUserTypeChange = (type: UserType) => {
     setFormData(
@@ -153,6 +174,17 @@ const MultiStepForm: React.FC = () => {
         ...prev,
         [name]: undefined,
       }))
+    }
+  }
+
+  const handlePhoneChange = (value: string): void => {
+    setFormData((prev) => ({
+      ...prev,
+      phoneNumber: value,
+    }))
+
+    if (errors.phoneNumber) {
+      setErrors((prev) => ({ ...prev, phoneNumber: undefined }))
     }
   }
 
@@ -203,7 +235,7 @@ const MultiStepForm: React.FC = () => {
     } else {
       try {
         console.log('Form submitted:', formData)
-        // await submitFormData(formData);
+        navigate('/verify')
       } catch (error) {
         console.error('Submission error:', error)
       }
@@ -224,7 +256,7 @@ const MultiStepForm: React.FC = () => {
         onClick={() => handleUserTypeChange('customer')}
         className={`flex-1 py-3 px-4 rounded-xl font-semibold ${
           formData.userType === 'customer'
-            ? 'bg-b300 text-white'
+            ? 'bg-[#1B3B86] text-white'
             : 'bg-gray-200 text-gray-700'
         }`}
       >
@@ -235,7 +267,7 @@ const MultiStepForm: React.FC = () => {
         onClick={() => handleUserTypeChange('serviceProvider')}
         className={`flex-1 py-3 px-4 rounded-xl font-semibold ${
           formData.userType === 'serviceProvider'
-            ? 'bg-b300 text-white'
+            ? 'bg-[#1B3B86] text-white'
             : 'bg-gray-200 text-gray-700'
         }`}
       >
@@ -335,6 +367,17 @@ const MultiStepForm: React.FC = () => {
       </div>
 
       <div className='flex flex-col gap-2'>
+        <div className='flex w-full items-center'>
+          <PhoneInput
+            value={formData.phoneNumber}
+            onChange={handlePhoneChange}
+            error={errors.phoneNumber}
+            placeholder='Enter your phone number'
+          />
+        </div>
+      </div>
+
+      <div className='flex flex-col gap-2'>
         <div
           className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
             errors.password ? 'border-red-500' : 'border-[#1B3B86]/10'
@@ -364,17 +407,17 @@ const MultiStepForm: React.FC = () => {
           <div className='flex flex-col gap-2'>
             <div
               className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
-                errors.companyName ? 'border-red-500' : 'border-n30'
-              } px-4 py-3`}
+                errors.companyName ? 'border-red-500' : 'border-[#1B3B86]/10'
+              } bg-[#1B3B86]/5 px-4 py-3 focus-within:border-[#E31C79] transition-colors`}
             >
-              <i className='ph ph-buildings text-2xl !leading-none'></i>
+              <i className='ph ph-buildings text-2xl !leading-none text-[#1B3B86]'></i>
               <input
                 type='text'
                 name='companyName'
                 value={(formData as ServiceProviderFormData).companyName}
                 onChange={handleInputChange}
                 placeholder='Enter Company Name'
-                className='w-full text-sm text-n300 outline-none'
+                className='w-full text-sm text-gray-600 outline-none bg-transparent placeholder:text-gray-500'
                 disabled={(formData as ServiceProviderFormData).isIndividual}
               />
             </div>
@@ -391,7 +434,7 @@ const MultiStepForm: React.FC = () => {
               onChange={handleInputChange}
               className='h-4 w-4'
             />
-            <p className='text-sm text-n300'>
+            <p className='text-sm text-gray-600'>
               I'm providing services as an individual
             </p>
           </div>
@@ -399,17 +442,19 @@ const MultiStepForm: React.FC = () => {
           <div className='flex flex-col gap-2'>
             <div
               className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
-                errors.professionalTitle ? 'border-red-500' : 'border-n30'
-              } px-4 py-3`}
+                errors.professionalTitle
+                  ? 'border-red-500'
+                  : 'border-[#1B3B86]/10'
+              } bg-[#1B3B86]/5 px-4 py-3 focus-within:border-[#E31C79] transition-colors`}
             >
-              <i className='ph ph-briefcase text-2xl !leading-none'></i>
+              <i className='ph ph-briefcase text-2xl !leading-none text-[#1B3B86]'></i>
               <input
                 type='text'
                 name='professionalTitle'
                 value={(formData as ServiceProviderFormData).professionalTitle}
                 onChange={handleInputChange}
                 placeholder='Professional Title'
-                className='w-full text-sm text-n300 outline-none'
+                className='w-full text-sm text-gray-600 outline-none bg-transparent placeholder:text-gray-500'
               />
             </div>
             {errors.professionalTitle && (
@@ -424,17 +469,17 @@ const MultiStepForm: React.FC = () => {
       <div className='flex flex-col gap-2'>
         <div
           className={`flex w-full items-center justify-start gap-3 rounded-2xl border ${
-            errors.location ? 'border-red-500' : 'border-n30'
-          } px-4 py-3`}
+            errors.location ? 'border-red-500' : 'border-[#1B3B86]/10'
+          } bg-[#1B3B86]/5 px-4 py-3 focus-within:border-[#E31C79] transition-colors`}
         >
-          <i className='ph ph-map-pin text-2xl !leading-none'></i>
+          <i className='ph ph-map-pin text-2xl !leading-none text-[#1B3B86]'></i>
           <input
             type='text'
             name='location'
             value={formData.location}
             onChange={handleInputChange}
             placeholder='Location'
-            className='w-full text-sm text-n300 outline-none'
+            className='w-full text-sm text-gray-600 outline-none bg-transparent placeholder:text-gray-500'
           />
         </div>
         {errors.location && (
@@ -443,10 +488,10 @@ const MultiStepForm: React.FC = () => {
       </div>
 
       <div className=''>
-        <p className='pb-3 text-sm text-n300'>
+        <p className='pb-3 text-sm text-gray-600'>
           Add a photo to help build connection and trust.
         </p>
-        <label className='flex flex-col items-center justify-center rounded-3xl border border-b50 bg-n10 px-3 py-10 cursor-pointer relative'>
+        <label className='flex flex-col items-center justify-center rounded-3xl border border-[#1B3B86]/10 bg-[#1B3B86]/5 px-3 py-10 cursor-pointer relative'>
           <input
             type='file'
             accept='image/*'
@@ -462,7 +507,7 @@ const MultiStepForm: React.FC = () => {
               />
             </div>
           ) : (
-            <i className='ph ph-image text-6xl !leading-none'></i>
+            <i className='ph ph-image text-6xl !leading-none text-[#1B3B86]'></i>
           )}
           <p className='pt-3 text-sm font-medium'>
             {formData.profilePhoto ? 'Change photo' : 'Upload profile photo'}
@@ -504,7 +549,7 @@ const MultiStepForm: React.FC = () => {
           )}
           <button
             type='submit'
-            className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-b300 px-4 py-3 font-semibold text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-xl after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] sm:px-8 ${
+            className={`relative flex items-center justify-center overflow-hidden rounded-xl bg-[#1B3B86] px-4 py-3 font-semibold text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-xl after:bg-[#E31C79] after:duration-700 hover:text-white hover:after:w-[calc(100%+2px)] sm:px-8 ${
               step > 1 ? 'flex-1' : 'w-full'
             }`}
           >
@@ -515,8 +560,11 @@ const MultiStepForm: React.FC = () => {
         </div>
 
         <div className='flex items-center justify-center gap-2 py-3 text-sm font-medium'>
-          <p className='text-n300'>Already have an account?</p>
-          <Link to='/signin' className='text-b300 underline'>
+          <p className='text-gray-600'>Already have an account?</p>
+          <Link
+            to='/signin'
+            className='text-[#1B3B86] hover:text-[#E31C79] transition-colors underline'
+          >
             Sign in here
           </Link>
         </div>
