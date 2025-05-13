@@ -1,4 +1,4 @@
-import fixedPriceServiceImg from '../../assets/images/fixed_price_service_img.png'
+import fixedPriceServiceImg from '../../assets/images/total_earnings_line.webp'
 import totalEarningLine from '../../assets/images/total_earnings_line.png'
 
 const FixedPriceServiceSection = () => {

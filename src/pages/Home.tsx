@@ -6,7 +6,6 @@ import {
   LookingForServiceSection,
   NewsletterSection,
   RecentPostsSection,
-  ReviewSection,
   SecureGuardSection,
   TopExpertsSection,
 } from '../components'
@@ -21,7 +20,7 @@ const Home = () => {
       <LookingForServiceSection />
       <NewsletterSection />
       <SecureGuardSection />
-      <ReviewSection />
+      {/* <ReviewSection /> */}
       <GetWorkersGigs />
       <RecentPostsSection />
     </>

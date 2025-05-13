@@ -766,7 +766,7 @@ const TaskPostingForm = () => {
             />
           </div>
           <div>
-            <p className='pb-4'>What is your main goal on Servibe? *</p>
+            <p className='pb-4'>What is your main goal on Bollo? *</p>
             <div className='flex w-full items-center justify-start font-medium max-sm:flex-wrap'>
               <button
                 onClick={() =>
@@ -833,7 +833,7 @@ const TaskPostingForm = () => {
               }
             />
             <p className='text-sm text-n300'>
-              I agree to the Servibe
+              I agree to the Bollo
               <a href='./terms-conditions' className='text-b300'>
                 {' '}
                 Terms & Conditions
@@ -867,7 +867,7 @@ const TaskPostingForm = () => {
     <section>
       <div className='4xl:large-container flex items-center justify-between pt-6 max-4xl:container'>
         <Link to='/'>
-          <img src={logo} alt='Servibe logo' className='w-auto h-14' />
+          <img src={logo} alt='Bollo logo' className='w-auto h-14' />
         </Link>
         <Link
           to='/'

@@ -17,8 +17,16 @@ import EscrowPayment from './EscrowPayment'
 import TaskDetails from './TaskDetails'
 import ProposalSubmissionPage from './ProposalSubmissionPage'
 import OTPVerification from './auth/Verity'
+import JoinWaitlist from './JoinWaitlist'
+import Terms from './Terms'
+import PrivacyPolicy from './PrivacyPolicy'
+import Contact from './Contact'
 
 export {
+  Contact,
+  PrivacyPolicy,
+  Terms,
+  JoinWaitlist,
   Home,
   BecomeTasker,
   Services,

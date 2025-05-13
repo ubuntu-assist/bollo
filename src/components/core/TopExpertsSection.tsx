@@ -66,7 +66,7 @@ const TopExpertsSection = () => {
                   {/* Expert Info */}
                   <div>
                     <div className='flex items-center gap-3'>
-                      <h5 className='heading-5 text-[#1B3B86]'>Mayme Cole</h5>
+                      <h5 className='heading-5 text-[#1B3B86]'>Duclair Fopa</h5>
                       <span className='rounded-full bg-[#E31C79] px-2 py-1 text-xs font-medium text-white'>
                         PRO
                       </span>

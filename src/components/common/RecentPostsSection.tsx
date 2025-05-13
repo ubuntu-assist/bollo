@@ -1,6 +1,6 @@
-import blogPostImage1 from '../../assets/images/blog-post-image-1.png'
-import blogPostImage2 from '../../assets/images/blog-post-image-2.png'
-import blogPostImage3 from '../../assets/images/blog-post-image-3.png'
+import blogPostImage1 from '../../assets/images/blog-post-image-1.jpg'
+import blogPostImage2 from '../../assets/images/blog-post-image-2.jpg'
+import blogPostImage3 from '../../assets/images/blog-post-image-3.jpg'
 
 const RecentPostsSection = () => {
   const blogPosts = [

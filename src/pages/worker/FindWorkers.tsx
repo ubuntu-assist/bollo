@@ -74,7 +74,7 @@ const FindWorkers = () => {
                 </div>
                 <div className='max-[350px]:max-w-20'>
                   <div className='flex items-center justify-start gap-3'>
-                    <h5 className='heading-5'>Mayme Cole</h5>
+                    <h5 className='heading-5'>Duclair Fopa</h5>
                     <p className='rounded-full bg-y300 px-2 py-1 text-xs font-medium'>
                       PRO
                     </p>
@@ -975,7 +975,7 @@ const FindWorkers = () => {
                 </div>
                 <div className='max-[350px]:max-w-20'>
                   <div className='flex items-center justify-start gap-3'>
-                    <h5 className='heading-5'>Mayme Cole</h5>
+                    <h5 className='heading-5'>Duclair Fopa</h5>
                     <p className='rounded-full bg-y300 px-2 py-1 text-xs font-medium'>
                       PRO
                     </p>

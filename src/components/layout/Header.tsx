@@ -3,10 +3,18 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link } from 'react-router'
-import { ChevronDown, ChevronRight, X, Menu, Plus } from 'lucide-react'
+import {
+  ChevronDown,
+  ChevronRight,
+  X,
+  Menu,
+  Plus,
+  Maximize,
+  Minimize,
+} from 'lucide-react'
 import logo from '../../assets/images/logo.png'
+import { useResizeDetector } from 'react-resize-detector'
 
-// Interfaces for TypeScript
 interface NavOption {
   title: string
   url: string
@@ -22,7 +30,7 @@ interface NavItem {
 interface Language {
   code: string
   name: string
-  flag: string
+  countryCode: string
 }
 
 const Header = () => {
@@ -30,14 +38,19 @@ const Header = () => {
   const [scrolled, setScrolled] = useState(false)
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null)
   const [currentLanguage, setCurrentLanguage] = useState<string>('en')
+  const [navSize, setNavSize] = useState('normal')
 
-  // Define languages for language selector
+  const { width, ref } = useResizeDetector({
+    handleHeight: false,
+    refreshMode: 'debounce',
+    refreshRate: 200,
+  })
+
   const languages: Language[] = [
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
+    { code: 'en', name: 'English', countryCode: 'GB' },
+    { code: 'fr', name: 'Français', countryCode: 'FR' },
   ]
 
-  // Navigation items
   const navItems: NavItem[] = [
     { name: 'Home', type: 'link', to: '/' },
     {
@@ -56,17 +69,16 @@ const Header = () => {
         { title: 'Worker Directory', url: '/worker-directory' },
       ],
     },
-    {
-      name: 'Pages',
-      type: 'dropdown',
-      options: [
-        { title: 'About Us', url: '/about' },
-        { title: 'Contact', url: '/contact' },
-      ],
-    },
+    // {
+    //   name: 'Pages',
+    //   type: 'dropdown',
+    //   options: [
+    //     { title: 'About Us', url: '/about' },
+    //     { title: 'Contact', url: '/contact' },
+    //   ],
+    // },
   ]
 
-  // Detect scroll for navbar styling changes
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY
@@ -76,6 +88,16 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  useEffect(() => {
+    if (width) {
+      if (width < 768) {
+        setNavSize('compact')
+      } else if (width >= 768 && width < 1280) {
+        setNavSize('normal')
+      }
+    }
+  }, [width])
 
   // Toggle mobile menu
   const toggleMenu = () => {
@@ -87,22 +109,40 @@ const Header = () => {
     setActiveSubmenu(activeSubmenu === name ? null : name)
   }
 
-  // Handle language change
   const handleLanguageChange = (code: string) => {
     setCurrentLanguage(code)
-    // Here you would implement language change logic
   }
 
-  // Get current language
   const getCurrentLanguage = () => {
     return languages.find((lang) => lang.code === currentLanguage)
+  }
+
+  const toggleNavSize = () => {
+    if (navSize === 'normal') {
+      setNavSize('compact')
+    } else if (navSize === 'compact') {
+      setNavSize('normal')
+    } else {
+      setNavSize('normal')
+    }
+  }
+
+  const getFlagUrl = (countryCode: string) => {
+    return `https://flagsapi.com/${countryCode}/flat/32.png`
   }
 
   return (
     <>
       <motion.header
+        ref={ref}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'py-3' : 'py-4'
+          scrolled
+            ? 'py-2'
+            : navSize === 'compact'
+            ? 'py-2'
+            : navSize === 'normal'
+            ? 'py-3'
+            : 'py-4'
         }`}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -128,30 +168,85 @@ const Header = () => {
                 )}
               </button>
 
+              {/* Resize Button */}
+              <button
+                onClick={toggleNavSize}
+                className='hidden md:flex text-[#1B3B86] mr-3 w-10 h-10 justify-center items-center rounded-full bg-[#1B3B86]/10 hover:bg-[#1B3B86]/20 transition-colors duration-300'
+                aria-label='Resize navbar'
+              >
+                {navSize === 'compact' ? (
+                  <Maximize className='h-5 w-5' />
+                ) : navSize === 'expanded' ? (
+                  <Minimize className='h-5 w-5' />
+                ) : (
+                  <Maximize className='h-5 w-5' />
+                )}
+              </button>
+
               {/* Logo */}
               <Link to='/' className='flex items-center'>
-                <img src={logo} alt='Bollo logo' className='h-10 w-auto' />
+                <img
+                  src={logo}
+                  alt='Bollo logo'
+                  className={`transition-all duration-300 ${
+                    navSize === 'compact'
+                      ? 'h-8 w-auto'
+                      : navSize === 'normal'
+                      ? 'h-10 w-auto'
+                      : 'h-12 w-auto'
+                  }`}
+                />
               </Link>
             </div>
 
             {/* Desktop Navigation */}
             <div className='hidden lg:block'>
               <nav>
-                <ul className='flex items-center gap-6 font-medium'>
+                <ul
+                  className={`flex items-center gap-6 font-medium transition-all duration-300 ${
+                    navSize === 'compact'
+                      ? 'text-sm'
+                      : navSize === 'normal'
+                      ? 'text-base'
+                      : 'text-lg'
+                  }`}
+                >
                   {navItems.map((item) => (
                     <li key={item.name} className='group relative'>
                       {item.type === 'link' ? (
                         <Link
                           to={item.to!}
-                          className='block px-2 py-3 text-[#1B3B86] hover:text-[#E31C79] transition-colors'
+                          className={`block px-2 py-2 text-[#1B3B86] hover:text-[#E31C79] transition-colors ${
+                            navSize === 'compact'
+                              ? 'py-1'
+                              : navSize === 'normal'
+                              ? 'py-2'
+                              : 'py-3'
+                          }`}
                         >
                           {item.name}
                         </Link>
                       ) : (
                         <>
-                          <div className='flex items-center gap-1 px-2 py-3 text-[#1B3B86] hover:text-[#E31C79] transition-colors cursor-pointer'>
+                          <div
+                            className={`flex items-center gap-1 px-2 text-[#1B3B86] hover:text-[#E31C79] transition-colors cursor-pointer ${
+                              navSize === 'compact'
+                                ? 'py-1'
+                                : navSize === 'normal'
+                                ? 'py-2'
+                                : 'py-3'
+                            }`}
+                          >
                             {item.name}
-                            <ChevronDown className='h-4 w-4 transition-transform group-hover:rotate-180' />
+                            <ChevronDown
+                              className={`transition-transform group-hover:rotate-180 ${
+                                navSize === 'compact'
+                                  ? 'h-3 w-3'
+                                  : navSize === 'normal'
+                                  ? 'h-4 w-4'
+                                  : 'h-5 w-5'
+                              }`}
+                            />
                           </div>
                           <div className='invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute left-0 top-full w-48 bg-[#1B3B86] rounded-lg py-4 transition-all'>
                             {item.options!.map((option) => (
@@ -176,12 +271,40 @@ const Header = () => {
             {/* Right Side Elements */}
             <div className='flex items-center gap-6'>
               <div className='hidden sm:flex items-center gap-6'>
-                {/* Language Selector */}
+                {/* Language Selector with Flag Images */}
                 <div className='group relative'>
-                  <button className='flex items-center gap-2 px-2 py-3 text-[#1B3B86] hover:text-[#E31C79] transition-colors'>
-                    <span>{getCurrentLanguage()?.flag}</span>
+                  <button
+                    className={`flex items-center gap-2 px-2 text-[#1B3B86] hover:text-[#E31C79] transition-colors ${
+                      navSize === 'compact'
+                        ? 'py-1'
+                        : navSize === 'normal'
+                        ? 'py-2'
+                        : 'py-3'
+                    }`}
+                  >
+                    <img
+                      src={getFlagUrl(
+                        getCurrentLanguage()?.countryCode || 'GB'
+                      )}
+                      alt={getCurrentLanguage()?.name || 'English'}
+                      className={`inline-block rounded-sm ${
+                        navSize === 'compact'
+                          ? 'w-4 h-4'
+                          : navSize === 'normal'
+                          ? 'w-5 h-5'
+                          : 'w-6 h-6'
+                      }`}
+                    />
                     <span>{getCurrentLanguage()?.code.toUpperCase()}</span>
-                    <ChevronDown className='h-4 w-4 transition-transform group-hover:rotate-180' />
+                    <ChevronDown
+                      className={`transition-transform group-hover:rotate-180 ${
+                        navSize === 'compact'
+                          ? 'h-3 w-3'
+                          : navSize === 'normal'
+                          ? 'h-4 w-4'
+                          : 'h-5 w-5'
+                      }`}
+                    />
                   </button>
                   <ul className='invisible opacity-0 group-hover:visible group-hover:opacity-100 absolute right-0 top-full w-48 bg-[#1B3B86] rounded-lg py-4 transition-all'>
                     {languages.map((lang) => (
@@ -190,7 +313,11 @@ const Header = () => {
                           onClick={() => handleLanguageChange(lang.code)}
                           className='w-full text-left px-6 py-2 text-white hover:text-[#E31C79] transition-colors flex items-center gap-2'
                         >
-                          <span>{lang.flag}</span>
+                          <img
+                            src={getFlagUrl(lang.countryCode)}
+                            alt={lang.name}
+                            className='inline-block w-5 h-5 rounded-sm'
+                          />
                           <span>{lang.name}</span>
                         </button>
                       </li>
@@ -201,7 +328,13 @@ const Header = () => {
                 {/* Sign In Link */}
                 <Link
                   to='/signin'
-                  className='text-[#1B3B86] hover:text-[#E31C79] transition-colors'
+                  className={`text-[#1B3B86] hover:text-[#E31C79] transition-colors ${
+                    navSize === 'compact'
+                      ? 'text-sm'
+                      : navSize === 'normal'
+                      ? 'text-base'
+                      : 'text-lg'
+                  }`}
                 >
                   Sign in
                 </Link>
@@ -210,15 +343,45 @@ const Header = () => {
               <div className='flex items-center gap-3'>
                 <Link
                   to='/post-task'
-                  className='flex items-center justify-center h-11 rounded-full bg-[#1B3B86] text-white hover:bg-[#E31C79] transition-colors'
+                  className={`flex items-center justify-center rounded-full bg-[#1B3B86] text-white hover:bg-[#E31C79] transition-colors ${
+                    navSize === 'compact'
+                      ? 'h-9 text-sm'
+                      : navSize === 'normal'
+                      ? 'h-11 text-base'
+                      : 'h-12 text-lg'
+                  }`}
                 >
-                  <span className='hidden xxl:block px-8'>Post a Task</span>
-                  <Plus className='xxl:hidden h-5 w-5 mx-3' />
+                  <span
+                    className={`hidden ${
+                      navSize === 'compact'
+                        ? 'xxl:block px-6'
+                        : navSize === 'normal'
+                        ? 'xxl:block px-8'
+                        : 'xl:block px-8'
+                    }`}
+                  >
+                    Post a Task
+                  </span>
+                  <Plus
+                    className={`${
+                      navSize === 'compact'
+                        ? 'xxl:hidden h-4 w-4 mx-3'
+                        : navSize === 'normal'
+                        ? 'xxl:hidden h-5 w-5 mx-3'
+                        : 'xl:hidden h-6 w-6 mx-4'
+                    }`}
+                  />
                 </Link>
 
                 <Link
                   to='/create-contract'
-                  className='hidden xl:flex items-center px-8 py-3 rounded-full border-2 border-[#1B3B86] text-[#1B3B86] hover:bg-[#E31C79] hover:border-[#E31C79] hover:text-white transition-colors'
+                  className={`hidden xl:flex items-center border-2 border-[#1B3B86] text-[#1B3B86] hover:bg-[#E31C79] hover:border-[#E31C79] hover:text-white transition-colors rounded-full ${
+                    navSize === 'compact'
+                      ? 'px-6 py-2 text-sm'
+                      : navSize === 'normal'
+                      ? 'px-8 py-3 text-base'
+                      : 'px-10 py-3 text-lg'
+                  }`}
                 >
                   Create a Contract
                 </Link>
@@ -240,7 +403,7 @@ const Header = () => {
           >
             <div className='container mx-auto px-4 py-8'>
               <div className='p-6'>
-                {/* Language Selector for Mobile */}
+                {/* Language Selector for Mobile with Flag Images */}
                 <div className='mb-6'>
                   <div className='text-white/80 mb-2'>Select Language</div>
                   <div className='grid grid-cols-2 gap-2'>
@@ -257,7 +420,11 @@ const Header = () => {
                             : 'text-white/80 hover:text-white'
                         }`}
                       >
-                        <span>{lang.flag}</span>
+                        <img
+                          src={getFlagUrl(lang.countryCode)}
+                          alt={lang.name}
+                          className='inline-block w-5 h-5 rounded-sm'
+                        />
                         <span>{lang.name}</span>
                       </button>
                     ))}

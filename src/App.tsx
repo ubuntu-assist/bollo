@@ -6,12 +6,15 @@ import {
   BecomeTasker,
   BrowseTasks,
   ChatPage,
+  Contact,
   EscrowPayment,
   FindWorkers,
   HireMe,
   Home,
+  JoinWaitlist,
   NotFoundPage,
   OTPVerification,
+  PrivacyPolicy,
   ProposalSubmissionPage,
   ServiceDetails,
   Services,
@@ -19,6 +22,7 @@ import {
   SignUp,
   SmartContractForm,
   TaskDetails,
+  Terms,
   WorkerPortfolio,
   WorkerProfile,
   WorkingProcessed,
@@ -49,8 +53,12 @@ function App() {
           <Route index element={<Home />} />
           <Route path='become-tasker' element={<BecomeTasker />} />
           <Route path='services' element={<Services />} />
+          <Route path='join-waitlist' element={<JoinWaitlist />} />
           <Route path='services/:slug' element={<ServiceDetails />} />
           <Route path='hire-me' element={<HireMe />} />
+          <Route path='privacy-policy' element={<PrivacyPolicy />} />
+          <Route path='contact' element={<Contact />} />
+          <Route path='terms-and-agreements' element={<Terms />} />
           <Route path='worker-profile' element={<WorkerProfile />} />
           <Route path='chat' element={<ChatPage />} />
           <Route path='find-workers' element={<FindWorkers />} />

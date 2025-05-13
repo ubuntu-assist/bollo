@@ -1,9 +1,9 @@
 /*============================================ 
-# Template Name: Servibe
+# Template Name: Bollo
 # Version: 1.0
 # Author: pixelaxis
 # Author URI: https://themeforest.net/user/pixelaxis/
-# Description: Servibe - On Deman Service HTML Template
+# Description: Bollo - On Deman Service HTML Template
 ============================================*/
 
 /*============================================ 
@@ -506,25 +506,25 @@ input[type='number'] {
   content: '';
 }
 .expertImg1::before {
-  background: url(./assets/images/expert_img_1.png);
+  background: url(./assets/images/people_small1.webp);
 }
 .expertImg2::before {
-  background: url(./assets/images/expert_img_2.png);
+  background: url(./assets/images/people_small1.webp);
 }
 .expertImg3::before {
-  background: url(./assets/images/expert_img_3.png);
+  background: url(./assets/images/people_small1.webp);
 }
 .expertImg4::before {
-  background: url(./assets/images/expert_img_4.png);
+  background: url(./assets/images/people_small1.webp);
 }
 .expertImg5::before {
-  background: url(./assets/images/expert_img_5.png);
+  background: url(./assets/images/people_small1.webp);
 }
 .expertImg6::before {
-  background: url(./assets/images/expert_img_6.png);
+  background: url(./assets/images/people_small1.webp);
 }
 .expertImgBig::before {
-  background: url(./assets/images/expert_img_6.png);
+  background: url(./assets/images/people_small1.webp);
 }
 
 /* Calendar style */

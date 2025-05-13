@@ -1,4 +1,5 @@
-import homeContactImg from '../../assets/images/home_contact_img.png'
+import { Link } from 'react-router'
+import homeContactImg from '../../assets/images/home_contact_img.webp'
 
 const LookingForServiceSection = () => {
   return (
@@ -52,15 +53,15 @@ const LookingForServiceSection = () => {
 
           {/* CTA Button */}
           <div>
-            <a
-              href='./contact'
+            <Link
+              to='/contact'
               className='group relative flex items-center justify-start pr-12 font-semibold'
             >
               <span className='rounded-full bg-[#E31C79] text-white px-6 py-3 duration-500 group-hover:translate-x-12'>
                 Contact Now
               </span>
               <i className='ph-bold ph-arrow-up-right absolute right-0 top-0 translate-x-0 rounded-full bg-[#E31C79] text-white p-[14px] text-xl !leading-none duration-500 group-hover:right-[154px] group-hover:rotate-45'></i>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -127,7 +127,7 @@ const HireMe: React.FC = () => {
           <div className='flex flex-col items-start justify-start gap-3 pt-8'>
             <p className='text-sm font-medium text-gray-900'>ABOUT</p>
             <p className='text-gray-600'>
-              Welcome to Servibe where convenience meets quality. Discover a
+              Welcome to Bollo where convenience meets quality. Discover a
               seamless platform connecting you with trusted service providers
               effortlessly.
             </p>
