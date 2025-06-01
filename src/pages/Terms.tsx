@@ -1,30 +1,40 @@
+import { Link } from 'react-router'
+
 const Terms = () => {
   return (
     <>
-      <section className='stp-30 4xl:large-container mx-4 mt-[100px] rounded-3xl bg-n900 pb-52 md:pb-60 lg:rounded-[60px] lg:pb-72'>
-        <div className='container flex flex-col items-center justify-center gap-3 text-white'>
-          <h2 className='heading-2'>Terms & Condition</h2>
+      <section className='py-16 sm:py-20 xl:py-24 mx-4 mt-[100px] rounded-3xl bg-[#1B3B86] pb-52 md:pb-60 lg:rounded-[60px] lg:pb-72'>
+        <div className='container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-3 text-white'>
+          <h2 className='text-3xl sm:text-4xl lg:text-5xl font-bold'>
+            Terms & Condition
+          </h2>
 
           <ul className='flex items-center justify-start gap-2 pt-3 font-medium'>
             <li>
-              <a href='./index.html'>Home</a>
+              <Link to='/' className='hover:text-[#E31C79] transition-colors'>
+                Home
+              </Link>
             </li>
-            <li className='text-r300'>
+            <li className='text-[#E31C79]'>
               <i className='ph ph-caret-double-right'></i>
             </li>
-            <li className='text-r300'>Terms & Condition</li>
+            <li className='text-[#E31C79]'>Terms & Condition</li>
           </ul>
         </div>
       </section>
 
-      <section className='sbp-30'>
-        <div className='container -mt-40 rounded-xl border border-n30 bg-white p-4 sm:p-4 md:rounded-3xl xl:rounded-[60px] xl:p-15'>
-          <h2 className='heading-2 text-center'>Terms & Condition</h2>
+      <section className='py-16 sm:py-20'>
+        <div className='container mx-auto px-4 sm:px-6 lg:px-8 -mt-40 rounded-xl border border-gray-200 bg-white p-4 sm:p-4 md:rounded-3xl xl:rounded-[60px] xl:p-16'>
+          <h2 className='text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-gray-900'>
+            Terms & Condition
+          </h2>
 
-          <ol className='stp-15 flex list-inside list-decimal flex-col gap-8'>
-            <li className='marker:heading-4'>
-              <span className='heading-4'>Introduction</span>
-              <ul className='block list-inside list-disc pt-3 text-lg text-n300 marker:text-[10px] marker:text-n900'>
+          <ol className='mt-12 flex list-inside list-decimal flex-col gap-8'>
+            <li className='marker:text-xl marker:font-semibold marker:text-[#1B3B86]'>
+              <span className='text-xl sm:text-2xl font-semibold text-[#1B3B86]'>
+                Introduction
+              </span>
+              <ul className='block list-inside list-disc pt-3 text-lg text-gray-600 marker:text-[10px] marker:text-gray-900'>
                 <li>
                   Welcome to Bollo These terms and conditions govern your use of
                   our website and services. By accessing or using our website
@@ -33,9 +43,11 @@ const Terms = () => {
                 </li>
               </ul>
             </li>
-            <li className='marker:heading-4'>
-              <span className='heading-4'>User Agreement</span>
-              <ul className='block list-inside list-disc pt-3 text-lg text-n300 marker:text-[10px] marker:text-n900'>
+            <li className='marker:text-xl marker:font-semibold marker:text-[#1B3B86]'>
+              <span className='text-xl sm:text-2xl font-semibold text-[#1B3B86]'>
+                User Agreement
+              </span>
+              <ul className='block list-inside list-disc pt-3 text-lg text-gray-600 marker:text-[10px] marker:text-gray-900'>
                 <li>
                   You must be at least 18 years old and legally capable of
                   entering into contracts to use our services. By using our
@@ -48,9 +60,11 @@ const Terms = () => {
                 </li>
               </ul>
             </li>
-            <li className='marker:heading-4'>
-              <span className='heading-4'>Service Description</span>
-              <ul className='block list-inside list-disc pt-3 text-lg text-n300 marker:text-[10px] marker:text-n900'>
+            <li className='marker:text-xl marker:font-semibold marker:text-[#1B3B86]'>
+              <span className='text-xl sm:text-2xl font-semibold text-[#1B3B86]'>
+                Service Description
+              </span>
+              <ul className='block list-inside list-disc pt-3 text-lg text-gray-600 marker:text-[10px] marker:text-gray-900'>
                 <li>
                   Our website provides a platform for users to On Demand
                   Services. We do not provide the services ourselves but
@@ -58,9 +72,11 @@ const Terms = () => {
                 </li>
               </ul>
             </li>
-            <li className='marker:heading-4'>
-              <span className='heading-4'>Payment Terms</span>
-              <ul className='block list-inside list-disc pt-3 text-lg text-n300 marker:text-[10px] marker:text-n900'>
+            <li className='marker:text-xl marker:font-semibold marker:text-[#1B3B86]'>
+              <span className='text-xl sm:text-2xl font-semibold text-[#1B3B86]'>
+                Payment Terms
+              </span>
+              <ul className='block list-inside list-disc pt-3 text-lg text-gray-600 marker:text-[10px] marker:text-gray-900'>
                 <li>
                   Payment for services must be made through our platform. We may
                   use third-party payment processors, and you agree to abide by
@@ -73,9 +89,11 @@ const Terms = () => {
                 </li>
               </ul>
             </li>
-            <li className='marker:heading-4'>
-              <span className='heading-4'>User Responsibilities</span>
-              <ul className='block list-inside list-disc pt-3 text-lg text-n300 marker:text-[10px] marker:text-n900'>
+            <li className='marker:text-xl marker:font-semibold marker:text-[#1B3B86]'>
+              <span className='text-xl sm:text-2xl font-semibold text-[#1B3B86]'>
+                User Responsibilities
+              </span>
+              <ul className='block list-inside list-disc pt-3 text-lg text-gray-600 marker:text-[10px] marker:text-gray-900'>
                 <li>
                   Users are responsible for their interactions with service
                   providers. We do not endorse or guarantee the quality of
@@ -93,9 +111,11 @@ const Terms = () => {
               </ul>
             </li>
 
-            <li className='marker:heading-4'>
-              <span className='heading-4'>Privacy Policy</span>
-              <ul className='block list-inside list-disc pt-3 text-lg text-n300 marker:text-[10px] marker:text-n900'>
+            <li className='marker:text-xl marker:font-semibold marker:text-[#1B3B86]'>
+              <span className='text-xl sm:text-2xl font-semibold text-[#1B3B86]'>
+                Privacy Policy
+              </span>
+              <ul className='block list-inside list-disc pt-3 text-lg text-gray-600 marker:text-[10px] marker:text-gray-900'>
                 <li>
                   Our privacy policy governs how we collect, use, and disclose
                   personal information. By using our services, you agree to our
@@ -103,9 +123,11 @@ const Terms = () => {
                 </li>
               </ul>
             </li>
-            <li className='marker:heading-4'>
-              <span className='heading-4'>Limitation of Liability</span>
-              <ul className='block list-inside list-disc pt-3 text-lg text-n300 marker:text-[10px] marker:text-n900'>
+            <li className='marker:text-xl marker:font-semibold marker:text-[#1B3B86]'>
+              <span className='text-xl sm:text-2xl font-semibold text-[#1B3B86]'>
+                Limitation of Liability
+              </span>
+              <ul className='block list-inside list-disc pt-3 text-lg text-gray-600 marker:text-[10px] marker:text-gray-900'>
                 <li>
                   We are not liable for any direct, indirect, incidental,
                   special, or consequential damages resulting from your use of
@@ -129,9 +151,11 @@ const Terms = () => {
                 </li>
               </ul>
             </li>
-            <li className='marker:heading-4'>
-              <span className='heading-4'>Changes to Terms</span>
-              <ul className='block list-inside list-disc pt-3 text-lg text-n300 marker:text-[10px] marker:text-n900'>
+            <li className='marker:text-xl marker:font-semibold marker:text-[#1B3B86]'>
+              <span className='text-xl sm:text-2xl font-semibold text-[#1B3B86]'>
+                Changes to Terms
+              </span>
+              <ul className='block list-inside list-disc pt-3 text-lg text-gray-600 marker:text-[10px] marker:text-gray-900'>
                 <li>
                   We reserve the right to modify these terms and conditions at
                   any time. Changes will be effective upon posting on our

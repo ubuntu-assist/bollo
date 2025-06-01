@@ -2,13 +2,233 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1B3B86" />
+
+    <!-- Viewport and Mobile -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <!-- SEO Meta Tags -->
+    <title>Bollo - Connect with Skilled Service Providers Across Africa</title>
+    <meta
+      name="description"
+      content="Find trusted service providers for home repairs, cleaning, handyman services and more across Africa. Join thousands connecting with skilled professionals on Bollo."
+    />
+    <meta
+      name="keywords"
+      content="service providers, handyman services, home repairs, cleaning services, skilled workers, Africa, on-demand services, professional services"
+    />
+    <meta name="author" content="Bollo" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+    <meta name="geo.region" content="CM" />
+    <meta name="geo.placename" content="Cameroon" />
+    <meta name="geo.position" content="5.4731;10.4178" />
+    <meta name="ICBM" content="5.4731, 10.4178" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bollo-web.vercel.app/" />
+    <meta
+      property="og:title"
+      content="Bollo - Connect with Skilled Service Providers Across Africa"
+    />
+    <meta
+      property="og:description"
+      content="Find trusted service providers for home repairs, cleaning, handyman services and more across Africa. Join thousands connecting with skilled professionals on Bollo."
+    />
+    <meta
+      property="og:image"
+      content="https://bollo-web.vercel.app/og-image.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Bollo" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://bollo-web.vercel.app" />
+    <meta
+      property="twitter:title"
+      content="Bollo - Connect with Skilled Service Providers Across Africa"
+    />
+    <meta
+      property="twitter:description"
+      content="Find trusted service providers for home repairs, cleaning, handyman services and more across Africa. Join thousands connecting with skilled professionals on Bollo."
+    />
+    <meta
+      property="twitter:image"
+      content="https://bollo-web.vercel.app/og-image.jpg"
+    />
+    <meta property="twitter:creator" content="@BolloAfrica" />
+    <meta property="twitter:site" content="@BolloAfrica" />
+
+    <!-- LinkedIn -->
+    <meta property="linkedin:owner" content="bollo-africa" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://bollo-web.vercel.app/" />
+
+    <!-- Preload Critical Resources -->
+    <link
+      rel="preload"
+      href="/fonts/inter-var.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- DNS Prefetch for External Resources -->
+    <link rel="dns-prefetch" href="//unpkg.com" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Bollo",
+        "url": "https://bollo-web.vercel.app",
+        "description": "Connect with skilled service providers across Africa for home repairs, cleaning, handyman services and more.",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://bollo-web.vercel.app/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        },
+        "sameAs": [
+          "https://facebook.com/BolloAfrica",
+          "https://twitter.com/BolloAfrica",
+          "https://linkedin.com/company/bollo-africa"
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Bollo",
+        "url": "https://bollo-web.vercel.app",
+        "logo": "https://bollo-web.vercel.app/logo.png",
+        "description": "Africa's leading platform connecting customers with skilled service providers for on-demand services.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bafoussam",
+          "addressRegion": "West Region",
+          "addressCountry": "Cameroon"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "email": "support@bollo-web.vercel.app"
+        },
+        "sameAs": [
+          "https://facebook.com/BolloAfrica",
+          "https://twitter.com/BolloAfrica",
+          "https://linkedin.com/company/bollo-africa"
+        ],
+        "foundingDate": "2024",
+        "areaServed": [
+          {
+            "@type": "Country",
+            "name": "Cameroon"
+          },
+          {
+            "@type": "Country",
+            "name": "Nigeria"
+          },
+          {
+            "@type": "Country",
+            "name": "Ghana"
+          },
+          {
+            "@type": "Country",
+            "name": "Kenya"
+          },
+          {
+            "@type": "Country",
+            "name": "Ethiopia"
+          }
+        ],
+        "serviceType": [
+          "Home Repair Services",
+          "Cleaning Services",
+          "Handyman Services",
+          "Professional Services",
+          "On-Demand Services"
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Bollo Service Platform",
+        "description": "On-demand service platform connecting customers with verified service providers across Africa",
+        "provider": {
+          "@type": "Organization",
+          "name": "Bollo"
+        },
+        "areaServed": "Africa",
+        "serviceType": "Service Marketplace",
+        "category": "Home Services"
+      }
+    </script>
+
+    <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
-    <title>Bollo</title>
+
+    <!-- Performance Hints -->
+    <link rel="preload" href="/hero-image.webp" as="image" />
+
+    <!-- Security -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+
+    <!-- No-index for development (remove in production) -->
+    <!-- <meta name="robots" content="noindex, nofollow" /> -->
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) - Add your GTM ID -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration)
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError)
+            })
+        })
+      }
+    </script>
   </body>
 </html>

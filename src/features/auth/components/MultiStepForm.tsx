@@ -3,8 +3,8 @@ import ImageEditorModal from './ImageEditorModal'
 import googleIcon from '../../../assets/images/google_icon.png'
 import facebookIcon from '../../../assets/images/facebook_icon.png'
 import { Link, useNavigate } from 'react-router'
-import { isPossiblePhoneNumber } from 'libphonenumber-js'
-import PhoneInput from '@/components/ui/phone-input'
+import { isValidPhoneNumber } from 'react-phone-number-input'
+import { PhoneInput } from '@/components/ui/phone-input'
 
 type UserType = 'customer' | 'serviceProvider'
 
@@ -73,7 +73,7 @@ const initialServiceProviderData: ServiceProviderFormData = {
 
 const validatePhoneNumber = (phoneNumber: string): boolean => {
   try {
-    return isPossiblePhoneNumber(phoneNumber)
+    return phoneNumber ? isValidPhoneNumber(phoneNumber) : false
   } catch (error) {
     return false
   }
@@ -177,10 +177,10 @@ const MultiStepForm: React.FC = () => {
     }
   }
 
-  const handlePhoneChange = (value: string): void => {
+  const handlePhoneChange = (value: string | undefined): void => {
     setFormData((prev) => ({
       ...prev,
-      phoneNumber: value,
+      phoneNumber: value || '',
     }))
 
     if (errors.phoneNumber) {
@@ -367,14 +367,25 @@ const MultiStepForm: React.FC = () => {
       </div>
 
       <div className='flex flex-col gap-2'>
-        <div className='flex w-full items-center'>
-          <PhoneInput
-            value={formData.phoneNumber}
-            onChange={handlePhoneChange}
-            error={errors.phoneNumber}
-            placeholder='Enter your phone number'
-          />
+        <div
+          className={`phone-input-wrapper rounded-2xl border ${
+            errors.phoneNumber ? 'border-red-500' : 'border-[#1B3B86]/10'
+          }  transition-colors`}
+        >
+          <div className='flex items-center gap-3'>
+            <div className='flex-1'>
+              <PhoneInput
+                value={formData.phoneNumber}
+                onChange={handlePhoneChange}
+                placeholder='Enter your phone number'
+                className='phone-input-custom'
+              />
+            </div>
+          </div>
         </div>
+        {errors.phoneNumber && (
+          <span className='text-xs text-red-500'>{errors.phoneNumber}</span>
+        )}
       </div>
 
       <div className='flex flex-col gap-2'>

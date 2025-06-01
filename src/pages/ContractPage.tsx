@@ -111,7 +111,7 @@ const SmartContractForm = () => {
 
   const renderStepIndicator = () => (
     <div className='col-span-12 md:col-span-4 xl:col-span-3 xl:col-start-2'>
-      <div className='rounded-3xl border border-n30 p-4 sm:p-8'>
+      <div className='rounded-3xl border border-gray-200 p-4 sm:p-8'>
         <ul className='flex flex-col gap-8'>
           {[
             { number: 1, title: 'Service Type' },
@@ -122,17 +122,17 @@ const SmartContractForm = () => {
             <li key={item.number} className='relative'>
               <div
                 className={`flex w-full items-center justify-start gap-4 rounded-full ${
-                  step === item.number ? 'bg-b50' : ''
+                  step === item.number ? 'bg-[#1B3B86]/10' : ''
                 } p-2`}
               >
                 <div
                   className={`flex size-9 items-center justify-center rounded-full 
                   ${
                     step > item.number
-                      ? 'bg-b300 text-white'
+                      ? 'bg-[#1B3B86] text-white'
                       : step === item.number
-                      ? 'bg-b300 text-white'
-                      : 'border-2 border-n300 text-n300'
+                      ? 'bg-[#1B3B86] text-white'
+                      : 'border-2 border-gray-300 text-gray-300'
                   } p-2 !leading-none`}
                 >
                   {step > item.number ? (
@@ -143,7 +143,7 @@ const SmartContractForm = () => {
                 </div>
                 <p
                   className={`text-sm font-medium ${
-                    step === item.number ? '' : 'text-n300'
+                    step === item.number ? 'text-gray-900' : 'text-gray-400'
                   }`}
                 >
                   {item.title}
@@ -165,11 +165,13 @@ const SmartContractForm = () => {
 
   const renderServiceSelection = () => (
     <div className='col-span-12 md:col-span-8 xl:col-span-6 xl:col-start-6'>
-      <div className='rounded-3xl border border-n30 p-6 sm:p-8'>
-        <h4 className='heading-4'>Select Service Type</h4>
+      <div className='rounded-3xl border border-gray-200 p-6 sm:p-8'>
+        <h4 className='text-xl sm:text-2xl font-semibold text-gray-900'>
+          Select Service Type
+        </h4>
 
         <div className='pt-6'>
-          <p className='pb-4 font-medium text-n300'>
+          <p className='pb-4 font-medium text-gray-600'>
             What type of service do you need?*
           </p>
           <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
@@ -179,11 +181,11 @@ const SmartContractForm = () => {
                 onClick={() =>
                   handleInputChange('serviceType', '', service.type)
                 }
-                className={`rounded-lg p-4 flex flex-col items-center justify-center gap-2
+                className={`rounded-lg p-4 flex flex-col items-center justify-center gap-2 transition-colors
                   ${
                     formData.serviceType === service.type
-                      ? 'bg-n900 text-white'
-                      : 'bg-n30'
+                      ? 'bg-[#1B3B86] text-white'
+                      : 'bg-gray-100 hover:bg-gray-200'
                   }`}
               >
                 <i className={`${service.icon} text-2xl`}></i>
@@ -194,32 +196,32 @@ const SmartContractForm = () => {
         </div>
 
         <div className='pt-6'>
-          <p className='pb-4'>Contract Title*</p>
+          <p className='pb-4 text-gray-900'>Contract Title*</p>
           <input
             type='text'
             value={formData.title}
             onChange={(e) => handleInputChange('title', '', e.target.value)}
             placeholder='Give your contract a clear title'
-            className='w-full rounded-2xl bg-n30 p-3 outline-none'
+            className='w-full rounded-2xl bg-gray-100 p-3 outline-none focus:ring-2 focus:ring-[#1B3B86]/20 focus:bg-white border border-transparent focus:border-[#1B3B86]'
           />
         </div>
 
         <div className='pt-6'>
-          <p className='pb-4'>Contract Description*</p>
+          <p className='pb-4 text-gray-900'>Contract Description*</p>
           <textarea
             value={formData.description}
             onChange={(e) =>
               handleInputChange('description', '', e.target.value)
             }
             placeholder='Describe the service requirements in detail...'
-            className='w-full rounded-2xl bg-n30 p-3 min-h-[100px] outline-none'
+            className='w-full rounded-2xl bg-gray-100 p-3 min-h-[100px] outline-none focus:ring-2 focus:ring-[#1B3B86]/20 focus:bg-white border border-transparent focus:border-[#1B3B86]'
           />
         </div>
 
-        <div className='stp-15 flex items-center justify-end'>
+        <div className='mt-12 flex items-center justify-end'>
           <button
             onClick={() => setStep(2)}
-            className='relative flex w-1/2 items-center justify-center overflow-hidden rounded-full bg-b300 px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
+            className='relative flex w-1/2 items-center justify-center overflow-hidden rounded-full bg-[#1B3B86] px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-[#E31C79] after:duration-700 hover:text-white hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
           >
             <span className='relative z-10'>Next</span>
           </button>
@@ -230,33 +232,35 @@ const SmartContractForm = () => {
 
   const renderContractTerms = () => (
     <div className='col-span-12 md:col-span-8 xl:col-span-6 xl:col-start-6'>
-      <div className='rounded-3xl border border-n30 p-6 sm:p-8'>
-        <h4 className='heading-4'>Define Contract Terms</h4>
+      <div className='rounded-3xl border border-gray-200 p-6 sm:p-8'>
+        <h4 className='text-xl sm:text-2xl font-semibold text-gray-900'>
+          Define Contract Terms
+        </h4>
 
         <div className='pt-6'>
-          <p className='pb-4 font-medium text-n300'>Completion Deadline*</p>
+          <p className='pb-4 font-medium text-gray-600'>Completion Deadline*</p>
           <input
             type='date'
             value={formData.terms.completionDeadline}
             onChange={(e) =>
               handleInputChange('terms', 'completionDeadline', e.target.value)
             }
-            className='w-full rounded-2xl bg-n30 p-3 outline-none'
+            className='w-full rounded-2xl bg-gray-100 p-3 outline-none focus:ring-2 focus:ring-[#1B3B86]/20 focus:bg-white border border-transparent focus:border-[#1B3B86]'
           />
         </div>
 
         <div className='pt-6'>
-          <p className='pb-4 font-medium text-n300'>Payment Structure*</p>
-          <div className='flex w-full items-center justify-start font-medium'>
+          <p className='pb-4 font-medium text-gray-600'>Payment Structure*</p>
+          <div className='flex w-full items-center justify-start font-medium gap-2'>
             {['full', 'milestone', 'escrow'].map((term) => (
               <button
                 key={term}
                 onClick={() => handleInputChange('terms', 'paymentTerms', term)}
-                className={`rounded-lg ${
+                className={`rounded-lg transition-colors ${
                   formData.terms.paymentTerms === term
-                    ? 'bg-n900 text-white'
-                    : 'bg-n30'
-                } px-4 py-3 mr-2`}
+                    ? 'bg-[#1B3B86] text-white'
+                    : 'bg-gray-100 hover:bg-gray-200'
+                } px-4 py-3`}
               >
                 {term.charAt(0).toUpperCase() + term.slice(1)}
               </button>
@@ -266,9 +270,12 @@ const SmartContractForm = () => {
 
         {formData.terms.paymentTerms === 'milestone' && (
           <div className='pt-6'>
-            <p className='pb-4 font-medium text-n300'>Milestones</p>
+            <p className='pb-4 font-medium text-gray-600'>Milestones</p>
             {formData.terms.milestones.map((milestone, index) => (
-              <div key={milestone.id} className='mb-4 p-4 bg-n30 rounded-xl'>
+              <div
+                key={milestone.id}
+                className='mb-4 p-4 bg-gray-100 rounded-xl'
+              >
                 <input
                   type='text'
                   value={milestone.description}
@@ -278,7 +285,7 @@ const SmartContractForm = () => {
                     handleInputChange('terms', 'milestones', newMilestones)
                   }}
                   placeholder='Milestone description'
-                  className='w-full mb-2 bg-transparent outline-none'
+                  className='w-full mb-2 bg-transparent outline-none text-gray-900'
                 />
                 <div className='flex gap-4'>
                   <input
@@ -290,7 +297,7 @@ const SmartContractForm = () => {
                       handleInputChange('terms', 'milestones', newMilestones)
                     }}
                     placeholder='Amount'
-                    className='w-1/2 bg-transparent outline-none'
+                    className='w-1/2 bg-transparent outline-none text-gray-900'
                   />
                   <input
                     type='date'
@@ -300,7 +307,7 @@ const SmartContractForm = () => {
                       newMilestones[index].dueDate = e.target.value
                       handleInputChange('terms', 'milestones', newMilestones)
                     }}
-                    className='w-1/2 bg-transparent outline-none'
+                    className='w-1/2 bg-transparent outline-none text-gray-900'
                   />
                 </div>
               </div>
@@ -316,7 +323,7 @@ const SmartContractForm = () => {
                 })
                 handleInputChange('terms', 'milestones', newMilestones)
               }}
-              className='text-b300 flex items-center gap-2'
+              className='text-[#1B3B86] flex items-center gap-2 hover:text-[#E31C79] transition-colors'
             >
               <i className='ph-bold ph-plus'></i>
               Add Milestone
@@ -324,16 +331,16 @@ const SmartContractForm = () => {
           </div>
         )}
 
-        <div className='stp-15 flex items-center justify-between gap-6 mt-6'>
+        <div className='mt-12 flex items-center justify-between gap-6'>
           <button
             onClick={() => setStep(1)}
-            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-n30 px-4 py-2 text-lg font-medium duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
+            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-gray-100 px-4 py-2 text-lg font-medium duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-[#E31C79] after:duration-700 hover:text-white hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
           >
             <span className='relative z-10'>Back</span>
           </button>
           <button
             onClick={() => setStep(3)}
-            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-b300 px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
+            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-[#1B3B86] px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-[#E31C79] after:duration-700 hover:text-white hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
           >
             <span className='relative z-10'>Next</span>
           </button>
@@ -344,11 +351,13 @@ const SmartContractForm = () => {
 
   const renderRequirements = () => (
     <div className='col-span-12 md:col-span-8 xl:col-span-6 xl:col-start-6'>
-      <div className='rounded-3xl border border-n30 p-6 sm:p-8'>
-        <h4 className='heading-4'>Service Requirements</h4>
+      <div className='rounded-3xl border border-gray-200 p-6 sm:p-8'>
+        <h4 className='text-xl sm:text-2xl font-semibold text-gray-900'>
+          Service Requirements
+        </h4>
 
         <div className='pt-6'>
-          <p className='pb-4 font-medium text-n300'>
+          <p className='pb-4 font-medium text-gray-600'>
             Verification Requirements
           </p>
           <div className='space-y-4'>
@@ -363,9 +372,9 @@ const SmartContractForm = () => {
                     e.target.checked
                   )
                 }
-                className='rounded'
+                className='rounded accent-[#1B3B86]'
               />
-              <span>Require before/after photos</span>
+              <span className='text-gray-900'>Require before/after photos</span>
             </label>
 
             <label className='flex items-center gap-2'>
@@ -379,9 +388,9 @@ const SmartContractForm = () => {
                     e.target.checked
                   )
                 }
-                className='rounded'
+                className='rounded accent-[#1B3B86]'
               />
-              <span>Require final inspection</span>
+              <span className='text-gray-900'>Require final inspection</span>
             </label>
 
             <label className='flex items-center gap-2'>
@@ -395,15 +404,17 @@ const SmartContractForm = () => {
                     e.target.checked
                   )
                 }
-                className='rounded'
+                className='rounded accent-[#1B3B86]'
               />
-              <span>Require client approval before payment release</span>
+              <span className='text-gray-900'>
+                Require client approval before payment release
+              </span>
             </label>
           </div>
         </div>
 
         <div className='pt-6'>
-          <p className='pb-4 font-medium text-n300'>
+          <p className='pb-4 font-medium text-gray-600'>
             Dispute Resolution Method*
           </p>
           <div className='grid grid-cols-3 gap-4'>
@@ -413,10 +424,10 @@ const SmartContractForm = () => {
                 onClick={() =>
                   handleInputChange('verification', 'disputeResolution', method)
                 }
-                className={`rounded-lg p-4 ${
+                className={`rounded-lg p-4 transition-colors ${
                   formData.verification.disputeResolution === method
-                    ? 'bg-n900 text-white'
-                    : 'bg-n30'
+                    ? 'bg-[#1B3B86] text-white'
+                    : 'bg-gray-100 hover:bg-gray-200'
                 }`}
               >
                 {method.charAt(0).toUpperCase() + method.slice(1)}
@@ -425,16 +436,16 @@ const SmartContractForm = () => {
           </div>
         </div>
 
-        <div className='stp-15 flex items-center justify-between gap-6 mt-6'>
+        <div className='mt-12 flex items-center justify-between gap-6'>
           <button
             onClick={() => setStep(2)}
-            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-n30 px-4 py-2 text-lg font-medium duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
+            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-gray-100 px-4 py-2 text-lg font-medium duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-[#E31C79] after:duration-700 hover:text-white hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
           >
             <span className='relative z-10'>Back</span>
           </button>
           <button
             onClick={() => setStep(4)}
-            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-b300 px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
+            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-[#1B3B86] px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-[#E31C79] after:duration-700 hover:text-white hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
           >
             <span className='relative z-10'>Next</span>
           </button>
@@ -445,27 +456,31 @@ const SmartContractForm = () => {
 
   const renderPaymentSetup = () => (
     <div className='col-span-12 md:col-span-8 xl:col-span-6 xl:col-start-6'>
-      <div className='rounded-3xl border border-n30 p-6 sm:p-8'>
-        <h4 className='heading-4'>Payment Setup</h4>
+      <div className='rounded-3xl border border-gray-200 p-6 sm:p-8'>
+        <h4 className='text-xl sm:text-2xl font-semibold text-gray-900'>
+          Payment Setup
+        </h4>
 
         <div className='pt-6'>
-          <p className='pb-4 font-medium text-n300'>Service Amount*</p>
-          <div className='flex items-center justify-start gap-3 rounded-2xl bg-n30 p-3'>
-            <i className='ph-bold ph-currency-dollar'></i>
+          <p className='pb-4 font-medium text-gray-600'>Service Amount*</p>
+          <div className='flex items-center justify-start gap-3 rounded-2xl bg-gray-100 p-3 focus-within:ring-2 focus-within:ring-[#1B3B86]/20 focus-within:bg-white focus-within:border-[#1B3B86] border border-transparent'>
+            <i className='ph-bold ph-currency-dollar text-[#1B3B86]'></i>
             <input
               type='number'
               value={formData.payment.amount}
               onChange={(e) =>
                 handleInputChange('payment', 'amount', e.target.value)
               }
-              className='w-full bg-transparent outline-none placeholder:font-medium placeholder:text-n900'
+              className='w-full bg-transparent outline-none placeholder:font-medium placeholder:text-gray-500'
               placeholder='Enter amount'
             />
           </div>
         </div>
 
         <div className='pt-6'>
-          <p className='pb-4 font-medium text-n300'>Payment Release Terms*</p>
+          <p className='pb-4 font-medium text-gray-600'>
+            Payment Release Terms*
+          </p>
           <div className='flex flex-wrap items-center justify-start gap-3'>
             {['completion', 'milestone', 'inspection'].map((term) => (
               <button
@@ -473,10 +488,10 @@ const SmartContractForm = () => {
                 onClick={() =>
                   handleInputChange('payment', 'releaseTerms', term)
                 }
-                className={`rounded-2xl px-6 py-3 ${
+                className={`rounded-2xl px-6 py-3 transition-colors ${
                   formData.payment.releaseTerms === term
-                    ? 'bg-n900 text-white'
-                    : 'bg-n30'
+                    ? 'bg-[#1B3B86] text-white'
+                    : 'bg-gray-100 hover:bg-gray-200'
                 }`}
               >
                 {term.charAt(0).toUpperCase() + term.slice(1)}
@@ -493,28 +508,30 @@ const SmartContractForm = () => {
               onChange={(e) =>
                 handleInputChange('payment', 'escrowRequired', e.target.checked)
               }
-              className='rounded'
+              className='rounded accent-[#1B3B86]'
             />
-            <span className='font-medium'>Enable Escrow Protection</span>
+            <span className='font-medium text-gray-900'>
+              Enable Escrow Protection
+            </span>
           </label>
           {formData.payment.escrowRequired && (
-            <p className='mt-2 text-sm text-n300'>
+            <p className='mt-2 text-sm text-gray-600'>
               Funds will be held in escrow until service completion and
               verification
             </p>
           )}
         </div>
 
-        <div className='stp-15 flex items-center justify-between gap-6 mt-6'>
+        <div className='mt-12 flex items-center justify-between gap-6'>
           <button
             onClick={() => setStep(3)}
-            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-n30 px-4 py-2 text-lg font-medium duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
+            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-gray-100 px-4 py-2 text-lg font-medium duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-[#E31C79] after:duration-700 hover:text-white hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
           >
             <span className='relative z-10'>Back</span>
           </button>
           <button
             onClick={() => navigate('/pay')}
-            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-b300 px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-yellow-400 after:duration-700 hover:text-n900 hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
+            className='relative flex w-full items-center justify-center overflow-hidden rounded-full bg-[#1B3B86] px-4 py-2 text-lg font-medium text-white duration-700 after:absolute after:inset-0 after:left-0 after:w-0 after:rounded-full after:bg-[#E31C79] after:duration-700 hover:text-white hover:after:w-[calc(100%+2px)] lg:px-8 lg:py-3'
           >
             <span className='relative z-10'>Create Contract</span>
           </button>
@@ -525,19 +542,19 @@ const SmartContractForm = () => {
 
   return (
     <section>
-      <div className='4xl:large-container flex items-center justify-between pt-6 max-4xl:container'>
+      <div className='flex items-center justify-between pt-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <Link to='/'>
           <img src={logo} alt='Logo' className='w-auto h-14' />
         </Link>
         <Link
           to='/'
-          className='flex items-center justify-start gap-2 text-lg font-medium duration-500 hover:text-r300'
+          className='flex items-center justify-start gap-2 text-lg font-medium duration-500 hover:text-[#E31C79]'
         >
           Cancel <i className='ph-bold ph-x !leading-none'></i>
         </Link>
       </div>
 
-      <div className='stp-30 container grid grid-cols-12 gap-6'>
+      <div className='py-16 container mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-12 gap-6'>
         {renderStepIndicator()}
         {step === 1 && renderServiceSelection()}
         {step === 2 && renderContractTerms()}
